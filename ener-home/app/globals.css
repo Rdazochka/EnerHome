@@ -1,3 +1,26 @@
+:root {
+  /* Base */
+  --color-white: #ffffff;
+  --color-text: #001202;
+
+  /* Text accent */
+  --color-text-accent: #2f5803;
+
+  /* Backgrounds */
+  --color-background: #f8fffa;
+  --color-background-1: #ecfdef;
+  --color-background-2: #e0fee7;
+  --color-background-3: #7be191;
+  --color-background-4: #027965;
+
+  /* UI */
+  --color-button: #3aa150;
+  --color-border: #6cbb72;
+
+  /* Effects */
+  --color-glass: rgba(1, 15, 7, 0.32);
+}
+
 *,
 *::before,
 *::after {
