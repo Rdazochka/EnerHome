@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Header.module.css';
+import ConsultationModal from '@/components/ConsultationModal/ConsultationModal';
 
 const navItems = [
   { href: '#hero', label: 'Про нас' },
@@ -13,6 +14,7 @@ const navItems = [
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -31,10 +33,10 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={`${styles.container} container`}>
+      <div className={styles.container}>
         <a href="#hero" className={styles.logo}>
           <Image
-            src="/logo.svg"
+            src="/Logo.png"
             alt="EnerHome"
             width={118}
             height={54}
@@ -43,6 +45,11 @@ export default function Header() {
         </a>
 
         <nav className={styles.nav}>
+          <a href="#hero" className={styles.navHomeIcon}>
+            <svg width="24" height="24">
+              <use href="/sprites.svg#icon-home" />
+            </svg>
+          </a>
           {navItems.map(item => (
             <a key={item.href} href={item.href} className={styles.navLink}>
               {item.label}
@@ -50,9 +57,9 @@ export default function Header() {
           ))}
         </nav>
 
-        <a href="#consultation" className={styles.cta}>
+        <button className={styles.cta} onClick={() => setIsModalOpen(true)}>
           Консультація
-        </a>
+        </button>
 
         <button
           className={styles.burger}
@@ -74,7 +81,7 @@ export default function Header() {
         <div className={styles.mobileMenuHeader}>
           <a href="#hero" className={styles.logo} onClick={handleLinkClick}>
             <Image
-              src="/logo.svg"
+              src="/Logo.png"
               alt="EnerHome"
               width={118}
               height={54}
@@ -94,24 +101,35 @@ export default function Header() {
         </div>
 
         <nav className={styles.mobileNav}>
+          <div className={styles.mobileMenuTitle}>Меню</div>
+          <div className={styles.mobileMenuLine} />
+
+          <a href="#hero" className={styles.mobileNavItem} onClick={handleLinkClick}>
+            <svg className={styles.mobileNavIcon}>
+              <use href="/sprites.svg#icon-home" />
+            </svg>
+          </a>
+
           {navItems.map(item => (
             <a
               key={item.href}
               href={item.href}
-              className={styles.mobileNavLink}
+              className={styles.mobileNavItem}
               onClick={handleLinkClick}
             >
-              {item.label}
+              <span className={styles.mobileNavLink}>{item.label}</span>
             </a>
           ))}
         </nav>
 
         <div className={styles.mobileCtaWrapper}>
-          <a href="#consultation" className={styles.mobileCta} onClick={handleLinkClick}>
+          <button className={styles.mobileCta} onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }}>
             Консультація
-          </a>
+          </button>
         </div>
       </div>
+
+      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
