@@ -37,8 +37,11 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
   useEffect(() => {
     if (!isOpen) {
-      setPhone('+380');
-      setStatus('form');
+      const timer = setTimeout(() => {
+        setPhone('+380');
+        setStatus('form');
+      }, 300);
+      return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
@@ -82,61 +85,65 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
           </button>
 
           <div className={styles.modalInner}>
-          {status === 'success' ? (
-            <>
-              <h2 className={styles.title}>Дякуємо! Заявку надіслано</h2>
-              <svg className={styles.successIcon}>
-                <use href="/sprites.svg#icon-check" />
-              </svg>
-              <p className={styles.successText}>
-                Ми отримали ваш номер телефону. Наш фахівець зв&apos;яжеться з вами, щоб підібрати оптимальне рішення для вашого будинку.
-              </p>
-            </>
-          ) : (
-            <>
-              <h2 className={styles.title}>Отримайте безкоштовну консультацію</h2>
-              <p className={styles.description}>
-                Залиште номер телефону — наш фахівець зв&apos;яжеться з вами та допоможе підібрати оптимальне енергетичне рішення для вашого будинку.
-              </p>
-
-              <div className={styles.formGroup}>
-                <div className={`${styles.inputWrapper} ${status === 'error' ? styles.inputWrapperError : ''}`}>
-                  <svg className={styles.inputIcon}>
-                    <use href="/sprites.svg#icon-phone" />
-                  </svg>
-                  <input
-                    type="tel"
-                    className={styles.input}
-                    value={phone}
-                    onChange={e => {
-                      setPhone(e.target.value);
-                      if (status === 'error') setStatus('form');
-                    }}
-                    placeholder="+380"
-                  />
-                  <div className={styles.inputLine} />
-                </div>
-
-                {status === 'error' && (
-                  <p className={styles.error}>Будь ласка, введіть номер телефону.</p>
-                )}
-
-                <button
-                  className={`${styles.submitBtn} ${status === 'error' ? styles.submitBtnDisabled : ''}`}
-                  onClick={handleSubmit}
-                  disabled={status === 'error'}
-                >
-                  Консультація
-                </button>
-
-                <p className={styles.consent}>
-                  Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.
+            {status === 'success' ? (
+              <>
+                <h2 className={styles.title}>Дякуємо! Заявку надіслано</h2>
+                <svg className={styles.successIcon}>
+                  <use href="/sprites.svg#icon-check" />
+                </svg>
+                <p className={styles.successText}>
+                  Ми отримали ваш номер телефону. Наш спеціаліст зв’яжеться з вами, щоб підібрати
+                  оптимальне рішення для вашого будинку.
                 </p>
-              </div>
-            </>
-          )}
+              </>
+            ) : (
+              <>
+                <h2 className={styles.title}>Отримайте безкоштовну консультацію</h2>
+                <p className={styles.description}>
+                  Залиште номер телефону — наш спеціаліст зв’яжеться з вами та допоможе підібрати
+                  оптимальне енергетичне рішення для вашого будинку.
+                </p>
+
+                <div className={styles.formGroup}>
+                  <div
+                    className={`${styles.inputWrapper} ${status === 'error' ? styles.inputWrapperError : ''}`}
+                  >
+                    <svg className={styles.inputIcon}>
+                      <use href="/sprites.svg#icon-phone" />
+                    </svg>
+                    <input
+                      type="tel"
+                      className={styles.input}
+                      value={phone}
+                      onChange={e => {
+                        setPhone(e.target.value);
+                        if (status === 'error') setStatus('form');
+                      }}
+                      placeholder="+380"
+                    />
+                    <div className={styles.inputLine} />
+                  </div>
+
+                  {status === 'error' && (
+                    <p className={styles.error}>Будь ласка, введіть номер телефону.</p>
+                  )}
+
+                  <button
+                    className={`${styles.submitBtn} ${status === 'error' ? styles.submitBtnDisabled : ''}`}
+                    onClick={handleSubmit}
+                    disabled={status === 'error'}
+                  >
+                    Консультація
+                  </button>
+
+                  <p className={styles.consent}>
+                    Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

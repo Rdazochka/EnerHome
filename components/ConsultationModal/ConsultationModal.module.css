@@ -11,7 +11,9 @@
   justify-content: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
 
 .overlayActive {
@@ -20,18 +22,32 @@
 }
 
 .greenBackdrop {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 374px;
+
+  padding: 32px 16px;
+  box-sizing: border-box;
+  background: rgba(2, 121, 101, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modalOuter {
   position: relative;
   width: 342px;
+  max-height: 1152px;
   background: var(--color-background-2);
   border-radius: 16px;
   padding: 32px 16px;
+  box-sizing: border-box;
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
   transform: scale(0.9);
   transition: transform 0.3s ease;
+  overflow: hidden;
 }
 
 .overlayActive .modalOuter {
@@ -55,6 +71,8 @@
 
 .closeBtnTablet {
   display: none;
+  width: 34px;
+  height: 34px;
 }
 
 .closeIconMobile {
@@ -69,13 +87,17 @@
 }
 
 .modalInner {
+  width: 310px;
   background: var(--color-white);
   border-radius: 16px;
-  padding: 16px 6px 327px;
+
+  padding: 16px 6px 86px;
+  box-sizing: border-box;
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .title {
@@ -125,6 +147,7 @@
 
 .inputWrapperError {
   border-color: var(--color-error);
+  margin-bottom: 12px;
 }
 
 .inputIcon {
@@ -193,11 +216,12 @@
   font-size: 12px;
   text-align: center;
   color: var(--color-error);
+  margin-bottom: 32px;
 }
 
 .successIcon {
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   margin: 10px 0;
 }
 
@@ -208,6 +232,7 @@
   line-height: 122%;
   text-align: center;
   color: var(--color-text-accent);
+  margin-bottom: 158px;
 }
 
 @media (min-width: 768px) {
@@ -216,16 +241,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 834px;
+
+    max-width: none;
     padding: 88px;
     box-sizing: border-box;
     background: rgba(2, 121, 101, 0.2);
     border-radius: 16px;
-    z-index: 401;
   }
 
   .closeBtnTablet {
@@ -253,14 +279,21 @@
 
   .closeIconTablet {
     display: block;
+    width: 34px;
+    height: 34px;
   }
 
   .modalOuter {
-    width: 100%;
-    background: none;
-    padding: 0;
-    box-shadow: none;
+    width: 658px;
+
+    max-height: none;
+    background: var(--color-background-2);
+    border-radius: 16px;
+    padding: 88px 87px;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
     transform: none;
+    overflow: visible;
   }
 
   .overlayActive .modalOuter {
@@ -268,13 +301,17 @@
   }
 
   .modalInner {
-    width: 100%;
-    padding: 32px 32px 327px;
+    width: 484px;
+
+    max-height: none;
+    padding: 32px;
+    box-sizing: border-box;
+    overflow: visible;
   }
 
   .inputLine {
-    left: calc(50% - 164.5px);
-    width: 329px;
+    left: 47px;
+    width: 290px;
   }
 
   .inputWrapper {
@@ -286,8 +323,12 @@
     overflow: hidden;
   }
 
+  .inputWrapperError {
+    margin-bottom: 12px;
+  }
+
   .formGroup {
-    padding: 0;
+    padding: 0px 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -312,12 +353,93 @@
     line-height: 121%;
   }
 
-  .submitBtn {
-    display: none;
-  }
-
   .consent {
     font-size: 18px;
     line-height: 122%;
+    margin-bottom: 327px;
+  }
+
+  .error {
+    margin-bottom: 40px;
+  }
+
+  .submitBtn {
+    padding: 16px 44px;
+    font-size: 20px;
+    line-height: 120%;
+  }
+
+  .successIcon {
+    width: 209px;
+    height: 209px;
+  }
+
+  .successText {
+    font-size: 24px;
+    line-height: 121%;
+    margin-bottom: 364px;
+  }
+}
+
+@media (min-width: 1140px) {
+  .greenBackdrop {
+    width: 1440px;
+
+    padding: 88px 174px;
+    max-width: none;
+  }
+
+  .closeBtnTablet {
+    top: 50px;
+    right: 50px;
+  }
+
+  .modalOuter {
+    width: 1091px;
+
+    padding: 88px 171px;
+  }
+
+  .modalInner {
+    width: 749px;
+
+    padding: 32px 30px;
+  }
+
+  .title {
+    margin-bottom: 28px;
+  }
+
+  .description {
+    width: auto;
+    height: auto;
+    margin-bottom: 28px;
+  }
+
+  .inputWrapper {
+    width: auto;
+    height: auto;
+    margin-bottom: 28px;
+    padding: 17px 20px;
+  }
+
+  .inputWrapperError {
+    margin-bottom: 12px;
+  }
+
+  .submitBtn {
+    margin-bottom: 12px;
+  }
+
+  .consent {
+    margin-bottom: 0;
+  }
+
+  .error {
+    margin-bottom: 40px;
+  }
+
+  .successText {
+    margin-bottom: 0;
   }
 }
