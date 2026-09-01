@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import SystemSelection from '@/components/SystemSelection/SystemSelection';
@@ -8,14 +11,17 @@ import About from '@/components/About/About';
 import FAQ from '@/components/FAQ/FAQ';
 import ConsultationCTA from '@/components/ConsultationCTA/ConsultationCTA';
 import Footer from '@/components/Footer/Footer';
+import ConsultationModal from '@/components/ConsultationModal/ConsultationModal';
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
-      <Header />
+      <Header onConsultationClick={() => setIsModalOpen(true)} />
 
       <main>
-        <Hero />
+        <Hero onConsultationClick={() => setIsModalOpen(true)} />
         <SystemSelection />
         <Solutions />
         <HowItWorks />
@@ -26,6 +32,11 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      <ConsultationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }

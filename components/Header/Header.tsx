@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import styles from './Header.module.css';
-import ConsultationModal from '@/components/ConsultationModal/ConsultationModal';
 
 const navItems = [
   { href: '#hero', label: 'Про нас' },
@@ -12,9 +11,12 @@ const navItems = [
   { href: '#faq', label: 'FAQs' },
 ];
 
-export default function Header() {
+interface HeaderProps {
+  onConsultationClick?: () => void;
+}
+
+export default function Header({ onConsultationClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -57,7 +59,7 @@ export default function Header() {
           ))}
         </nav>
 
-        <button className={styles.cta} onClick={() => setIsModalOpen(true)}>
+        <button className={styles.cta} onClick={onConsultationClick}>
           Консультація
         </button>
 
@@ -123,13 +125,17 @@ export default function Header() {
         </nav>
 
         <div className={styles.mobileCtaWrapper}>
-          <button className={styles.mobileCta} onClick={() => { setIsModalOpen(true); setIsMenuOpen(false); }}>
+          <button
+            className={styles.mobileCta}
+            onClick={() => {
+              onConsultationClick?.();
+              setIsMenuOpen(false);
+            }}
+          >
             Консультація
           </button>
         </div>
       </div>
-
-      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </header>
   );
 }
