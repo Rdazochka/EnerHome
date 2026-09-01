@@ -19,6 +19,9 @@
 
   /* Effects */
   --color-glass: rgba(1, 15, 7, 0.32);
+
+  /* Error */
+  --color-error: #E53935;
 }
 
 *,
