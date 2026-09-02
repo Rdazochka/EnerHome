@@ -92,13 +92,13 @@
   flex-shrink: 0;
 }
 
-  .stepContent {
-    font-family: var(--font-montserrat);
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 121%;
-    color: var(--color-text);
-  }
+.stepContent {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  color: #000;
+}
 
 .stepTitle {
   font-weight: 400;
