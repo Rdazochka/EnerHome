@@ -92,13 +92,13 @@
   flex-shrink: 0;
 }
 
-.stepContent {
-  font-family: var(--font-montserrat);
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 122%;
-  color: #000;
-}
+  .stepContent {
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    color: var(--color-text);
+  }
 
 .stepTitle {
   font-weight: 400;
@@ -204,8 +204,12 @@
   }
 
   .title {
+    font-family: var(--font-ibm-plex-serif);
+    font-weight: 500;
     font-size: 38px;
     line-height: 126%;
+    color: var(--color-white);
+    margin-bottom: 32px;
   }
 
   .content {
@@ -224,8 +228,11 @@
   }
 
   .subtitle {
-    font-size: 24px;
-    line-height: 133%;
+    font-family: var(--font-ibm-plex-serif);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 131%;
+    color: var(--color-text-accent);
     max-width: none;
     margin-bottom: 32px;
   }
