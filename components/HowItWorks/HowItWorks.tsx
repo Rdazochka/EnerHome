@@ -3,28 +3,23 @@ import styles from './HowItWorks.module.css';
 const steps = [
   {
     number: '01',
-    title: 'Розповідаєте про будинок.',
-    description: 'Вказуєте основні параметри та потреби.',
+    text: 'Розповідаєте про будинок. Вказуєте основні параметри та потреби.',
   },
   {
     number: '02',
-    title: 'Отримуєте рекомендацію.',
-    description: 'Ми підбираємо оптимальну конфігурацію.',
+    text: 'Отримуєте рекомендацію. Ми підбираємо оптимальну конфігурацію.',
   },
   {
     number: '03',
-    title: 'Узгоджуємо рішення.',
-    description: 'Інженер уточнює технічні деталі.',
+    text: 'Узгоджуємо рішення. Інженер уточнює технічні деталі.',
   },
   {
     number: '04',
-    title: 'Встановлюємо систему.',
-    description: 'Виконуємо монтаж та налаштування.',
+    text: 'Встановлюємо систему. Виконуємо монтаж та налаштування.',
   },
   {
     number: '05',
-    title: 'Ви користуєтесь.',
-    description: 'Система забезпечує будинок необхідною енергією.',
+    text: 'Ви користуєтесь. Система забезпечує будинок необхідною енергією.',
   },
 ];
 
@@ -44,17 +39,12 @@ export default function HowItWorks() {
               </div>
 
               <ol className={styles.list}>
-                {steps.map((step) => (
-                  <li key={step.number} className={styles.step}>
-                    <span className={styles.number}>{step.number}</span>
-                    <div className={styles.stepContent}>
-                      <span className={styles.stepTitle}>{step.title}</span>{' '}
-                      <span className={styles.stepDescription}>
-                        {step.description}
-                      </span>
-                    </div>
-                  </li>
-                ))}
+            {steps.map((step) => (
+              <li key={step.number} className={styles.step}>
+                <span className={styles.number}>{step.number}</span>
+                <div className={styles.stepContent}>{step.text}</div>
+              </li>
+            ))}
               </ol>
             </div>
           </div>

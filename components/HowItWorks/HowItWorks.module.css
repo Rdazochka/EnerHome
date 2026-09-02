@@ -100,13 +100,7 @@
   color: #000;
 }
 
-.stepTitle {
-  font-weight: 400;
-}
 
-.stepDescription {
-  font-weight: 400;
-}
 
 /* Tablet */
 @media (min-width: 768px) {
