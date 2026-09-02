@@ -44,7 +44,7 @@
 .frame4 {
   border: 1px solid var(--color-white);
   border-radius: 16px;
-  padding: 16px 24px 20px 24px;
+  padding: 24px 16px;
   background: var(--color-background-2);
 }
 
