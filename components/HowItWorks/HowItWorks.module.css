@@ -65,11 +65,13 @@
 }
 
 .number {
-  font-family: var(--font-ibm-plex-serif);
+  font-family: var(--font-montserrat);
   font-weight: 700;
-  font-size: 28px;
-  line-height: 114%;
-  color: var(--color-text-accent);
+  font-size: 24px;
+  line-height: 117%;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--color-button);
   flex-shrink: 0;
 }
 
@@ -114,8 +116,8 @@
   }
 
   .number {
-    font-size: 32px;
-    line-height: 125%;
+    font-size: 28px;
+    line-height: 121%;
   }
 
   .stepContent {
@@ -155,8 +157,8 @@
   }
 
   .number {
-    font-size: 38px;
-    line-height: 121%;
+    font-size: 32px;
+    line-height: 125%;
   }
 
   .stepContent {
