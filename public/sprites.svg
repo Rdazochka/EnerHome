@@ -175,4 +175,12 @@
     <path d="M32.7129 32.7009L1.27563 0.700928M0.712891 32.7009L32.1502 0.700928" stroke="white" stroke-width="2" />
   </symbol>
 
+  <symbol id="icon-plus" viewBox="0 0 24 24" fill="none">
+    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  </symbol>
+
+  <symbol id="icon-minus" viewBox="0 0 24 24" fill="none">
+    <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+  </symbol>
+
 </svg>
