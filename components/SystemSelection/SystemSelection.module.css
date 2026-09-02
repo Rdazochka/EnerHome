@@ -83,7 +83,7 @@
 
 @media (min-width: 768px) {
   .container {
-    padding: 48px 32px;
+    padding: 44px 32px;
   }
 
   .title {
@@ -95,9 +95,8 @@
   }
 
   .cards {
-    flex-direction: row;
     gap: 24px;
-    justify-content: center;
+    align-items: center;
   }
 
   .card {
@@ -126,6 +125,31 @@
 
 @media (min-width: 1140px) {
   .container {
-    padding: 64px 100px;
+    padding: 88px 100px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 126%;
+    max-width: 748px;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cards {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .card {
+    padding: 34px 40px;
+    max-width: 608px;
+  }
+
+  .cardTitle {
+    font-size: 32px;
+    line-height: 131%;
   }
 }
