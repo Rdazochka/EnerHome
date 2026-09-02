@@ -22,7 +22,7 @@ export default function Home() {
 
       <main>
         <Hero onConsultationClick={() => setIsModalOpen(true)} />
-        <SystemSelection />
+        <SystemSelection onConsultationClick={() => setIsModalOpen(true)} />
         <Solutions />
         <HowItWorks />
         <Projects />
