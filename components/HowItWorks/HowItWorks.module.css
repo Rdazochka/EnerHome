@@ -33,6 +33,7 @@
 }
 
 .content {
+  max-width: 303px;
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
   background: var(--color-background-2);
   border-radius: 16px;
