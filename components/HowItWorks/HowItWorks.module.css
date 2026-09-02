@@ -196,11 +196,11 @@
   }
 
   .frame2 {
-    padding: 48px;
+    padding: 44px 50px;
   }
 
   .frame3 {
-    padding: 48px;
+    padding: 44px 50px;
   }
 
   .title {
@@ -210,11 +210,15 @@
 
   .content {
     padding: 44px 40px;
+    box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+    background: var(--color-background-2);
+    border-radius: 16px;
   }
 
   .frame4 {
-    padding: 0;
-    border: none;
+    padding: 44px 40px;
+    border: 1px solid var(--color-white);
+    border-radius: 16px;
     box-shadow: none;
     background: transparent;
   }
