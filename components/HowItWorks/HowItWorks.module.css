@@ -156,6 +156,7 @@
     text-align: center;
     color: var(--color-text-accent);
     max-width: 312px;
+    margin: 0;
   }
 
   .list {
