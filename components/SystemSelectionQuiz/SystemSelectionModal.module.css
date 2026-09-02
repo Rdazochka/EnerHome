@@ -12,6 +12,7 @@
 
 .modal {
   position: relative;
+  box-sizing: border-box;
   width: 343px;
   max-height: calc(100vh - 32px);
   padding: 32px 16px;
@@ -24,19 +25,21 @@
 
 .closeButton {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   width: 24px;
   height: 24px;
   padding: 0;
   border: none;
   background: transparent;
-  font-family: Arial, sans-serif;
-  font-size: 28px;
-  font-weight: 300;
-  line-height: 24px;
-  color: var(--color-text-accent);
+
   cursor: pointer;
+}
+
+.closeButton svg {
+  display: block;
+  width: 24px;
+  height: 24px;
 }
 
 .title {
@@ -84,7 +87,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 344;
+  width: 100%;
 }
 
 .option {
@@ -260,7 +263,7 @@
 }
 
 .phoneInvalid {
-  border-color: #ff5c5c;
+  border-color: var(--color-error);
 }
 
 .phoneError {
@@ -276,8 +279,11 @@
 }
 
 @media screen and (max-width: 767px) {
+  
   .modal {
-    width: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 343px;
   }
 
   .modalOverlay {

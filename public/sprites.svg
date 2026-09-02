@@ -175,4 +175,14 @@
     <path d="M32.7129 32.7009L1.27563 0.700928M0.712891 32.7009L32.1502 0.700928" stroke="white" stroke-width="2" />
   </symbol>
 
+  <symbol id="icon-checkmark" viewBox="0 0 100 100" fill="none">
+  <path
+    d="M30 52L44 66L70 36"
+    stroke="#3AA150"
+    stroke-width="6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</symbol>
+
 </svg>

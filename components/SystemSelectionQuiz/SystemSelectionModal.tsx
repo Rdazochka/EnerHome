@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import styles from './SystemSelectionModal.module.css';
 
-type SystemSelectionModalProps = {
+type SystemSelectionModalQuizProps = {
   onClose: () => void;
 };
 
-export default function SystemSelectionModal({ onClose }: SystemSelectionModalProps) {
+export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionModalQuizProps) {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
@@ -21,7 +21,9 @@ export default function SystemSelectionModal({ onClose }: SystemSelectionModalPr
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
         <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Закрити">
-          ×
+          <svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true">
+            <use href="/sprites.svg#icon-close-modal-sm" />
+          </svg>
         </button>
 
         <h2 className={styles.title}>Підберіть систему під свій будинок</h2>

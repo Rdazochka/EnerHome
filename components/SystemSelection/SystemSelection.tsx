@@ -9,14 +9,12 @@ interface SystemSelectionProps {
 const systems = [
   {
     title: 'Захист від відключень',
-    description:
-      'Електромережа є, але вам потрібне резервне живлення під час відключень.',
+    description: 'Електромережа є, але вам потрібне резервне живлення під час відключень.',
     ctaLabel: 'Підібрати резервне рішення',
   },
   {
     title: 'Автономне енергозабезпечення',
-    description:
-      'Електромережі немає або ви хочете забезпечити будинок власною енергією.',
+    description: 'Електромережі немає або ви хочете забезпечити будинок власною енергією.',
     ctaLabel: 'Підібрати автоному систему',
   },
 ];
@@ -30,7 +28,7 @@ export default function SystemSelection({ onConsultationClick }: SystemSelection
         </h2>
 
         <div className={styles.cards}>
-          {systems.map((system) => (
+          {systems.map(system => (
             <div key={system.title} className={styles.card}>
               <h3 className={styles.cardTitle}>{system.title}</h3>
               <p className={styles.cardDescription}>{system.description}</p>
