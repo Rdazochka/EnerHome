@@ -31,27 +31,33 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section className={styles.section}>
-      <div className={styles.wrapper}>
-        <h2 className={styles.title}>Як це працює</h2>
+      <div className={styles.frame1}>
+        <div className={styles.frame2}>
+          <div className={styles.frame3}>
+            <h2 className={styles.title}>Як це працює</h2>
 
-        <div className={styles.content}>
-          <p className={styles.subtitle}>
-            Від вашої потреби — до готової системи
-          </p>
+            <div className={styles.content}>
+              <div className={styles.frame4}>
+                <p className={styles.subtitle}>
+                  Від вашої потреби — до готової системи
+                </p>
+              </div>
 
-          <ol className={styles.list}>
-            {steps.map((step) => (
-              <li key={step.number} className={styles.step}>
-                <span className={styles.number}>{step.number}</span>
-                <div className={styles.stepContent}>
-                  <span className={styles.stepTitle}>{step.title}</span>{' '}
-                  <span className={styles.stepDescription}>
-                    {step.description}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ol>
+              <ol className={styles.list}>
+                {steps.map((step) => (
+                  <li key={step.number} className={styles.step}>
+                    <span className={styles.number}>{step.number}</span>
+                    <div className={styles.stepContent}>
+                      <span className={styles.stepTitle}>{step.title}</span>{' '}
+                      <span className={styles.stepDescription}>
+                        {step.description}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </section>
