@@ -220,8 +220,8 @@
   }
 
   .frame4 {
-    padding: 44px 40px;
-    border: 1px solid var(--color-white);
+    padding: 0;
+    border: none;
     border-radius: 16px;
     box-shadow: none;
     background: transparent;
