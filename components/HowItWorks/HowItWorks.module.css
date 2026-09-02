@@ -4,6 +4,8 @@
 }
 
 .frame1 {
+  max-width: 375px;
+  margin: 0 auto;
   padding: 16px 12px;
   background: var(--color-background-2);
 }
