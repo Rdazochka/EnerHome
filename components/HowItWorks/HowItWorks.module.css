@@ -252,7 +252,7 @@
   .step {
     max-width: none;
     padding: 12px;
-    gap: 6px;
+    gap: 13px;
   }
 
   .step:last-child {
