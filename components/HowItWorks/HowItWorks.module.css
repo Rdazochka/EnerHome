@@ -52,6 +52,7 @@
   line-height: 125%;
   text-align: center;
   color: var(--color-text-accent);
+  max-width: 253px;
 }
 
 .list {
