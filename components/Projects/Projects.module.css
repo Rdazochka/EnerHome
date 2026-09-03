@@ -1,1 +1,352 @@
+.section {
+  width: 100%;
+  background: var(--background);
+  padding: 32px 0;
+}
 
+.heading {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.title {
+  margin-bottom: 8px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14;
+  color: var(--tekst-akcent);
+}
+
+.subtitle {
+  font-size: 22px;
+  line-height: 1.27;
+  color: var(--text);
+}
+
+.carousel {
+  --card-width: min(335px, 100%);
+  --card-gap: 16px;
+  --shadow-space: 24px;
+  width: 100%;
+}
+
+.viewport {
+  width: 100%;
+  overflow: visible;
+  overscroll-behavior: contain;
+}
+
+.track {
+  display: flex;
+  gap: var(--card-gap);
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 20px;
+  margin-inline: -16px;
+  padding: var(--shadow-space) 20px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.trackJump {
+  scroll-behavior: auto;
+}
+
+.trackJump .frame1 {
+  transition: none;
+}
+
+.card {
+  position: relative;
+  z-index: 0;
+  flex: 0 0 var(--card-width);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.cardActive {
+  z-index: 1;
+}
+
+.frame1 {
+  height: 100%;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--background-2);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+  transform: scale(0.92);
+  transform-origin: center center;
+  transition: transform 0.35s ease;
+}
+
+.frame2 {
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--background-3);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.cardActive .frame1 {
+  transform: scale(1);
+}
+
+.frame2 picture {
+  display: block;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 311 / 459;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 335px;
+  margin: 32px auto 0;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.navIcon {
+  width: 28px;
+  height: 28px;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.dotIcon {
+  width: 12px;
+  height: 12px;
+}
+
+@media (min-width: 834px) {
+  .section {
+    padding: 45px 0;
+  }
+
+  .heading {
+    margin-bottom: 32px;
+    text-align: left;
+  }
+
+  .title {
+    margin-bottom: 8px;
+    font-size: 32px;
+    line-height: 1.38;
+  }
+
+  .subtitle {
+    font-size: 24px;
+    line-height: 1.21;
+  }
+
+  .carousel {
+    --card-width: 320px;
+    --card-gap: 24px;
+  }
+
+  .track {
+    margin-inline: -32px;
+    padding: 28px 32px;
+    scroll-padding-inline: 32px;
+  }
+
+  .frame1,
+  .frame2 {
+    padding: 16px;
+  }
+
+  .frame1 {
+    transform: scale(0.86);
+  }
+
+  .cardActive .frame1 {
+    transform: scale(1);
+  }
+
+  .photo {
+    aspect-ratio: 319 / 533;
+  }
+
+  .controls {
+    max-width: 420px;
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    padding: 88px 0;
+    overflow-x: clip;
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 1.26;
+  }
+
+  .subtitle {
+    font-size: 28px;
+    line-height: 1.21;
+    color: var(--text);
+  }
+
+  .carousel {
+    width: calc(100% + 200px);
+    margin-left: -100px;
+    --card-gap: 24px;
+    --card-width: 398px;
+  }
+
+  .viewport {
+    overflow: hidden;
+    height: 669px;
+    padding: 28px 0;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+  }
+
+  .track {
+    align-items: center;
+    overflow: visible;
+    scroll-snap-type: none;
+    scroll-padding-inline: 0;
+    margin-inline: 0;
+    padding: 0;
+    height: 613px;
+    touch-action: none;
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .trackDragging {
+    transition: none;
+    cursor: grabbing;
+  }
+
+  .trackJump,
+  .trackJump .card {
+    transition: none;
+  }
+
+  .card {
+    flex: 0 0 398px;
+    width: 398px;
+    height: 613px;
+    scroll-snap-align: unset;
+    z-index: 1;
+    transform-origin: center center;
+    will-change: transform;
+    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .trackDragging .card {
+    transition: none;
+  }
+
+  .cardFar {
+    z-index: 1;
+  }
+
+  .cardNear {
+    z-index: 2;
+  }
+
+  .cardActive {
+    z-index: 3;
+  }
+
+  .frame1,
+  .frame2 {
+    padding: 20px;
+    height: 100%;
+  }
+
+  .frame1 {
+    transform: none;
+  }
+
+  .cardActive .frame1 {
+    transform: none;
+  }
+
+  .frame2 {
+    display: flex;
+  }
+
+  .frame2 picture {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .photo {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  .controls {
+    max-width: 480px;
+    margin-top: 60px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track,
+  .card {
+    transition: none;
+  }
+
+  .frame1 {
+    transition: none;
+  }
+}
