@@ -1,79 +1,66 @@
 .hero {
-  position: relative;
-  width: 100%;
-  min-height: 720px;
-  overflow: hidden;
-}
-
-.picture {
-  position: absolute;
-  inset: 0;
-}
-
-.bgImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 18, 2, 0.55) 0%,
-    rgba(0, 18, 2, 0.25) 50%,
-    transparent 100%
+  --hero-image: image-set(
+    url('/images/hero/hero-section-mobile.jpg') 1x,
+    url('/images/hero/hero-section-mobile-2x.jpg') 2x
   );
+
+  background-image:
+    linear-gradient(
+      88.94deg,
+      rgba(0, 13, 3, 0.3) 55.83%,
+      rgba(2, 50, 12, 0.12) 93.12%,
+      rgba(102, 102, 102, 0) 120.48%
+    ),
+    var(--hero-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: calc(var(--header-height, 45px) + 100px);
+  padding-bottom: 85px;
 }
 
 .content {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  padding: 145px 16px 75px;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .title {
+  width: 100%;
+  margin-bottom: 16px;
   font-family: var(--second-family);
   font-weight: 700;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 127%;
-  letter-spacing: 0.02em;
   color: var(--white);
-  text-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.38);
-  margin-bottom: 16px;
+  text-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
 }
 
 .subtitle {
-  font-family: var(--font-family);
+  width: 100%;
+  margin-bottom: 117px;
   font-weight: 500;
   font-size: 20px;
-  line-height: 140%;
   color: var(--white);
   text-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-  margin-bottom: 117px;
 }
 
 .cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 343px;
   width: 100%;
-  padding: 16px 114px;
-  font-family: var(--font-family);
+  max-width: 343px;
+  padding: 16px 113px;
   font-weight: 600;
   font-size: 16px;
-  line-height: 150%;
+  line-height: 138%;
   color: var(--white);
   background: var(--button);
   border: 1px solid var(--background-2);
   border-radius: 16px;
   box-shadow: 4px 4px 16px 0 rgba(1, 73, 61, 0.4);
-  cursor: pointer;
   transition: background 0.3s ease;
 }
 
@@ -81,76 +68,54 @@
   background: var(--background-4);
 }
 
-/* Tablet */
 @media (min-width: 834px) {
   .hero {
-    min-height: 1024px;
-  }
+    --hero-image: image-set(
+      url('/images/hero/hero-section-tablet.jpg') 1x,
+      url('/images/hero/hero-section-tablet-2x.jpg') 2x
+    );
 
-  .content {
-    padding: 292px 32px 513px;
+    padding-top: calc(var(--header-height, 45px) + 231px);
+    padding-bottom: 513px;
   }
 
   .title {
-    font-family: var(--second-family);
-    font-weight: 700;
+    max-width: 711px;
     font-size: 36px;
     line-height: 128%;
-    color: var(--white);
-    text-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-    max-width: 680px;
-    margin-bottom: 16px;
   }
 
   .subtitle {
-    font-family: var(--font-family);
-    font-weight: 500;
+    max-width: 417px;
+    margin-bottom: 103px;
     font-size: 24px;
-    color: var(--white);
-    margin-bottom: 100px;
-    max-width: 500px;
   }
 
   .cta {
+    max-width: 232px;
     padding: 16px 44px;
-    width: 232px;
-    font-size: 20px;
-    line-height: 120%;
   }
 }
 
-/* Desktop */
 @media (min-width: 1440px) {
   .hero {
-    min-height: 789px;
-  }
+    --hero-image: image-set(
+      url('/images/hero/hero-section-desktop.jpg') 1x,
+      url('/images/hero/hero-section-desktop-2x.jpg') 2x
+    );
 
-  .content {
-    padding: 247px 412px 182px 101px;
+    padding-top: calc(var(--header-height, 45px) + 173px);
+    padding-bottom: 182px;
   }
 
   .title {
-    font-family: var(--second-family);
-    font-weight: 700;
+    max-width: 974px;
     font-size: 48px;
     line-height: 129%;
-    color: var(--white);
-    text-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-    max-width: 740px;
-    margin-bottom: 16px;
   }
 
   .subtitle {
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 24px;
-    color: var(--white);
-    margin-bottom: 75px;
-    max-width: 500px;
-  }
-
-  .cta {
-    margin-top: 40px;
-    padding: 16px 44px;
+    max-width: 608px;
+    margin-bottom: 72px;
   }
 }
