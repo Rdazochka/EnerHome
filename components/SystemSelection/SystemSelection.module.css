@@ -50,7 +50,6 @@
 }
 
 .cardDescription {
-  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 122%;
@@ -65,9 +64,7 @@
   justify-content: center;
   width: 100%;
   max-width: 311px;
-
   padding: 16px 30px;
-  font-family: var(--font-family);
   font-weight: 600;
   font-size: 16px;
   line-height: 138%;
@@ -76,7 +73,6 @@
   border: 1px solid var(--background-2);
   border-radius: 16px;
   box-shadow: 4px 4px 16px 0 rgba(1, 73, 61, 0.4);
-  cursor: pointer;
   transition: background 0.3s ease;
 }
 
@@ -86,7 +82,7 @@
 
 @media (min-width: 834px) {
   .container {
-    padding: 44px 32px;
+    padding: 44px 86px;
   }
 
   .title {

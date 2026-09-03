@@ -10,7 +10,6 @@ import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import Projects from '@/components/Projects/Projects';
 import About from '@/components/About/About';
 import FAQ from '@/components/FAQ/FAQ';
-import ConsultationCTA from '@/components/ConsultationCTA/ConsultationCTA';
 import Footer from '@/components/Footer/Footer';
 import ConsultationModal from '@/components/Header/ConsultationModal/ConsultationModal';
 
@@ -30,7 +29,6 @@ export default function Home() {
         <Projects />
         <About />
         <FAQ />
-        <ConsultationCTA />
       </main>
 
       <Footer />

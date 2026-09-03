@@ -4,104 +4,68 @@ import { useState } from 'react';
 import styles from './SystemSelectionQuiz.module.css';
 import SystemSelectionModal from './SystemSelectionModal';
 
+const quizOptions = [
+  { value: 'backup', label: 'Захист від відключень' },
+  { value: 'full', label: 'Повна автономність' },
+];
+
 export default function SystemSelectionQuiz() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedSystem, setSelectedSystem] = useState('full');
 
   return (
     <>
-      <section className={styles.systemSelection}>
-        <div className={styles.systemSelection_content}>
-          <div className={styles.systemSelection_inner}>
-            <h2 className={styles.systemSelection_title}>Підберіть систему під свій будинок</h2>
+      <section className={styles.quiz}>
+        <div className={styles.quizOuter}>
+          <div className={styles.quizInner}>
+            <h2 className={styles.quizTitle}>Підберіть систему під свій будинок</h2>
 
-            <div className={styles.systemSelection_row}>
-              <div className={styles.systemSelection_info}>
-                <h3 className={styles.systemSelection_subtitle}>Не знаєте, що вам потрібно?</h3>
+            <div className={styles.quizRow}>
+              <div className={styles.quizInfo}>
+                <h3 className={styles.quizSubtitle}>Не знаєте, що вам потрібно?</h3>
 
-                <p className={styles.systemSelection_text}>
+                <p className={styles.quizText}>
                   Відповідайте на кілька простих запитань — і отримаєте рекомендоване рішення.
                 </p>
               </div>
 
-              <div className={styles.systemSelection_question}>
-                <h3 className={styles.systemSelection_questionTitle}>Підберемо систему для вас</h3>
+              <div className={styles.quizCard}>
+                <h3 className={styles.quizCardTitle}>Підберемо систему для вас</h3>
 
-                <p className={styles.systemSelection_content_question}>
-                  Для чого потрібна система?
-                </p>
+                <p className={styles.quizQuestion}>Для чого потрібна система?</p>
 
-                <div className={styles.systemSelection_content_options}>
-                  <label className={styles.systemSelection_content_option}>
-                    <input
-                      type="radio"
-                      name="system"
-                      value="backup"
-                      checked={selectedSystem === 'backup'}
-                      onChange={() => setSelectedSystem('backup')}
-                      style={{ display: 'none' }}
-                    />
+                <div className={styles.quizOptions}>
+                  {quizOptions.map(option => (
+                    <label key={option.value} className={styles.quizOption}>
+                      <input
+                        type="radio"
+                        name="system"
+                        value={option.value}
+                        className={styles.optionInput}
+                        checked={selectedSystem === option.value}
+                        onChange={() => setSelectedSystem(option.value)}
+                      />
 
-                    <span className={styles.systemSelection_content_optionIcon}>
-                      <svg
-                        className={styles.systemSelection_content_optionIconOuter}
-                        aria-hidden="true"
-                      >
-                        <use href="/sprites.svg#icon-circle-stroke" />
-                      </svg>
-
-                      {selectedSystem === 'backup' && (
-                        <svg
-                          className={styles.systemSelection_content_optionIconFill}
-                          aria-hidden="true"
-                        >
-                          <use href="/sprites.svg#icon-circle-fill" />
+                      <span className={styles.optionIcon}>
+                        <svg className={styles.optionIconOuter} aria-hidden="true">
+                          <use href="/sprites.svg#icon-circle-stroke" />
                         </svg>
-                      )}
-                    </span>
 
-                    <span className={styles.systemSelection_content_optionText}>
-                      Захист від відключень
-                    </span>
-                  </label>
+                        {selectedSystem === option.value && (
+                          <svg className={styles.optionIconFill} aria-hidden="true">
+                            <use href="/sprites.svg#icon-circle-fill" />
+                          </svg>
+                        )}
+                      </span>
 
-                  <label className={styles.systemSelection_content_option}>
-                    <input
-                      type="radio"
-                      name="system"
-                      value="full"
-                      checked={selectedSystem === 'full'}
-                      onChange={() => setSelectedSystem('full')}
-                      style={{ display: 'none' }}
-                    />
-
-                    <span className={styles.systemSelection_content_optionIcon}>
-                      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-                        <use href="/sprites.svg#icon-circle-stroke" />
-                      </svg>
-
-                      {selectedSystem === 'full' && (
-                        <svg
-                          className={styles.systemSelection_content_optionIconFill}
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          aria-hidden="true"
-                        >
-                          <use href="/sprites.svg#icon-circle-fill" />
-                        </svg>
-                      )}
-                    </span>
-
-                    <span className={styles.systemSelection_content_optionText}>
-                      Повна автономність
-                    </span>
-                  </label>
+                      <span className={styles.optionText}>{option.label}</span>
+                    </label>
+                  ))}
                 </div>
 
                 <button
                   type="button"
-                  className={styles.systemSelection_content_button}
+                  className={styles.quizNextBtn}
                   onClick={() => setIsModalOpen(true)}
                 >
                   Наступне питання →
