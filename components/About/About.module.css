@@ -1,1 +1,162 @@
+.section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 36px 0;
+  background-color: var(--background-4);
+  background-image: url('/images/about/about-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
 
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  padding: 24px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  backdrop-filter: blur(16px) saturate(120%);
+  color: var(--white);
+}
+
+.title {
+  margin-bottom: 16px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.14;
+  text-align: center;
+}
+
+.slogan {
+  margin-bottom: 16px;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.27;
+  text-align: center;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.why {
+  margin-bottom: 16px;
+  font-family: var(--second-family);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.reasons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.reasonTitle {
+  font-weight: 600;
+}
+
+@media (min-width: 834px) {
+  .section {
+    padding: 44px 130px;
+    background-image: url('/images/about/about-background-tablet.jpg');
+  }
+
+  .card {
+    padding: 28px 40px;
+  }
+
+  .title {
+    margin-bottom: 12px;
+    font-size: 32px;
+    line-height: 1.38;
+    text-align: left;
+  }
+
+  .slogan {
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 1.21;
+    text-align: left;
+  }
+
+  .copy {
+    gap: 16px;
+    margin-bottom: 24px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+
+  .why {
+    margin-bottom: 16px;
+    font-size: 28px;
+    line-height: 1.21;
+    text-align: left;
+  }
+
+  .reasons {
+    gap: 16px;
+    font-size: 18px;
+    line-height: 1.22;
+  }
+}
+
+@media (min-width: 1440px) {
+  .section {
+    min-height: 760px;
+    padding: 88px 0;
+    background-image: url('/images/about/about-background-desktop.jpg');
+    background-position: right center;
+  }
+
+  .container {
+    justify-content: flex-start;
+  }
+
+  .card {
+    max-width: 630px;
+    padding: 40px 48px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 1.26;
+  }
+
+  .slogan {
+    max-width: 420px;
+    font-size: 28px;
+    line-height: 1.21;
+  }
+
+  .why {
+    font-size: 32px;
+    line-height: 1.31;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .card {
+    background: rgba(1, 15, 7, 0.88);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

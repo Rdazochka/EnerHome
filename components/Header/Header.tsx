@@ -5,7 +5,7 @@ import styles from './Header.module.css';
 import MobileMenu from './Mobile-menu/MobileMenu';
 
 const navItems = [
-  { href: '#hero', label: 'Про нас' },
+  { href: '#about', label: 'Про нас' },
   { href: '#solutions', label: 'Рішення' },
   { href: '#projects', label: 'Проєкти' },
   { href: '#faq', label: 'FAQs' },
