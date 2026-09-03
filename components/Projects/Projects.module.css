@@ -33,34 +33,31 @@
 
 .viewport {
   width: 100%;
-  overflow: visible;
-  overscroll-behavior: contain;
+  overflow: hidden;
+  padding-block: var(--shadow-space);
+  touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
 }
 
 .track {
   display: flex;
   gap: var(--card-gap);
-  overflow-x: auto;
-  overflow-y: visible;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  scroll-padding-inline: 20px;
+  overflow: visible;
   margin-inline: -16px;
-  padding: var(--shadow-space) 20px;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
+  padding-inline: 20px;
   touch-action: pan-x;
-  scrollbar-width: none;
+  will-change: transform;
+  transition: transform 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-.track::-webkit-scrollbar {
-  display: none;
+.trackDragging {
+  transition: none;
+  cursor: grabbing;
 }
 
-.trackJump {
-  scroll-behavior: auto;
-}
-
+.trackJump,
+.trackJump .card,
 .trackJump .frame1 {
   transition: none;
 }
@@ -69,8 +66,6 @@
   position: relative;
   z-index: 0;
   flex: 0 0 var(--card-width);
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
 }
 
 .cardActive {
@@ -85,7 +80,7 @@
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
   transform: scale(0.92);
   transform-origin: center center;
-  transition: transform 0.35s ease;
+  transition: transform 0.5s cubic-bezier(0.22, 0.08, 0.25, 1);
 }
 
 .frame2 {
@@ -132,6 +127,17 @@
   border-radius: 50%;
   background: var(--white);
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+
+.navBtn:hover {
+  transform: scale(1.06);
+}
+
+.navBtn:active {
+  transform: scale(0.94);
 }
 
 .navIcon {
@@ -189,8 +195,7 @@
 
   .track {
     margin-inline: -32px;
-    padding: 28px 32px;
-    scroll-padding-inline: 32px;
+    padding-inline: 32px;
   }
 
   .frame1,
@@ -262,7 +267,7 @@
     padding: 0;
     height: 613px;
     touch-action: none;
-    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   .trackDragging {
@@ -283,7 +288,7 @@
     z-index: 1;
     transform-origin: center center;
     will-change: transform;
-    transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.75s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   .trackDragging .card {
@@ -337,16 +342,5 @@
   .controls {
     max-width: 480px;
     margin-top: 60px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .track,
-  .card {
-    transition: none;
-  }
-
-  .frame1 {
-    transition: none;
   }
 }

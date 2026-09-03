@@ -33,14 +33,13 @@ const projects = [
 
 const SLIDE_COUNT = projects.length;
 const LOOP_COPIES = 3;
-const LOOP_OFFSET = SLIDE_COUNT;
 const INITIAL_INDEX = Math.floor(SLIDE_COUNT / 2);
-const INITIAL_LOOP_INDEX = LOOP_OFFSET + INITIAL_INDEX;
+const INITIAL_LOOP_INDEX = SLIDE_COUNT + INITIAL_INDEX;
 const DESKTOP_MQ = '(min-width: 1440px)';
 const DESKTOP_GAP = 24;
 const DESKTOP_CARD_WIDTH = 398;
 const DESKTOP_CARD_HEIGHT = 613;
-const DESKTOP_SLIDE_MS = 900;
+const SLIDE_MS = 750;
 
 const slides = Array.from({ length: SLIDE_COUNT * LOOP_COPIES }, (_, loopIndex) => ({
   project: projects[loopIndex % SLIDE_COUNT],
@@ -113,9 +112,7 @@ export default function Projects() {
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLUListElement>(null);
   const loopIndexRef = useRef(INITIAL_LOOP_INDEX);
-  const wheelLockRef = useRef(false);
   const trackOffsetRef = useRef(0);
-  const jumpingRef = useRef(false);
   const normalizeTimerRef = useRef(0);
   const dragRef = useRef({
     isDragging: false,
@@ -135,69 +132,40 @@ export default function Projects() {
     return nextLoopIndex;
   }, []);
 
-  const getCenteredIndex = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return LOOP_OFFSET;
-
-    const trackCenter = track.scrollLeft + track.clientWidth / 2;
-    let closestIndex = LOOP_OFFSET;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    Array.from(track.children).forEach((child, index) => {
-      const card = child as HTMLElement;
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(trackCenter - cardCenter);
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    return closestIndex;
-  }, []);
-
-  const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
-    if (isDesktopViewport()) return;
-
-    const track = trackRef.current;
-    const card = track?.children[index] as HTMLElement | undefined;
-    if (!track || !card) return;
-
-    const left = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
-    track.scrollTo({ left, behavior });
-  }, []);
-
-  const updateDesktopOffset = useCallback((index = loopIndexRef.current) => {
+  const updateOffset = useCallback((index = loopIndexRef.current) => {
     const viewport = viewportRef.current;
-    if (!viewport) return;
+    const track = trackRef.current;
+    if (!viewport || !track) return;
 
-    const x = getDesktopPackedLeft(index, index) + getDesktopCardSize(index, index).width / 2;
+    if (isDesktopViewport()) {
+      const x = getDesktopPackedLeft(index, index) + getDesktopCardSize(index, index).width / 2;
+      const offset = viewport.clientWidth / 2 - x;
+      setTrackOffset(offset);
+      trackOffsetRef.current = offset;
+      return;
+    }
 
-    setTrackOffset(viewport.clientWidth / 2 - x);
-    trackOffsetRef.current = viewport.clientWidth / 2 - x;
+    const card = track.children[index] as HTMLElement | undefined;
+    if (!card) return;
+
+    const offset = viewport.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+    setTrackOffset(offset);
+    trackOffsetRef.current = offset;
   }, []);
 
   const jumpToLoopIndex = useCallback(
     (nextLoopIndex: number) => {
-      jumpingRef.current = true;
       setIsJumping(true);
       commitLoopIndex(nextLoopIndex);
-
-      if (isDesktopViewport()) {
-        updateDesktopOffset(nextLoopIndex);
-      } else {
-        scrollToIndex(nextLoopIndex, 'auto');
-      }
+      updateOffset(nextLoopIndex);
 
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          jumpingRef.current = false;
           setIsJumping(false);
         });
       });
     },
-    [commitLoopIndex, scrollToIndex, updateDesktopOffset],
+    [commitLoopIndex, updateOffset],
   );
 
   const scheduleNormalize = useCallback(
@@ -208,27 +176,19 @@ export default function Projects() {
 
       normalizeTimerRef.current = window.setTimeout(() => {
         jumpToLoopIndex(normalized);
-      }, DESKTOP_SLIDE_MS);
+      }, SLIDE_MS);
     },
     [jumpToLoopIndex],
   );
 
   const goTo = useCallback(
     (index: number) => {
-      const currentLoopIndex = isDesktopViewport() ? loopIndexRef.current : getCenteredIndex();
-      const nextLoopIndex = nearestLoopIndex(index, currentLoopIndex);
-
+      const nextLoopIndex = nearestLoopIndex(index, loopIndexRef.current);
       commitLoopIndex(nextLoopIndex);
-
-      if (isDesktopViewport()) {
-        updateDesktopOffset(nextLoopIndex);
-        scheduleNormalize(nextLoopIndex);
-        return;
-      }
-
-      scrollToIndex(nextLoopIndex);
+      updateOffset(nextLoopIndex);
+      scheduleNormalize(nextLoopIndex);
     },
-    [commitLoopIndex, getCenteredIndex, scheduleNormalize, scrollToIndex, updateDesktopOffset],
+    [commitLoopIndex, scheduleNormalize, updateOffset],
   );
 
   useLayoutEffect(() => {
@@ -243,73 +203,12 @@ export default function Projects() {
   useLayoutEffect(() => {
     const normalized = normalizeLoopIndex(loopIndexRef.current);
     commitLoopIndex(normalized);
-
-    if (isDesktop) {
-      updateDesktopOffset(normalized);
-      return;
-    }
-
-    scrollToIndex(normalized, 'auto');
-  }, [commitLoopIndex, isDesktop, scrollToIndex, updateDesktopOffset]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || isDesktop) return;
-
-    let settleTimer = 0;
-
-    const settle = () => {
-      if (jumpingRef.current) return;
-
-      const nextLoopIndex = getCenteredIndex();
-      if (nextLoopIndex !== loopIndexRef.current) {
-        commitLoopIndex(nextLoopIndex);
-      }
-
-      const normalized = normalizeLoopIndex(nextLoopIndex);
-      if (normalized !== nextLoopIndex) {
-        jumpToLoopIndex(normalized);
-      }
-    };
-
-    const updateActiveIndex = () => {
-      if (jumpingRef.current) return;
-
-      const nextLoopIndex = getCenteredIndex();
-      if (nextLoopIndex !== loopIndexRef.current) {
-        commitLoopIndex(nextLoopIndex);
-      }
-
-      window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(settle, 80);
-    };
-
-    track.addEventListener('scroll', updateActiveIndex, { passive: true });
-    track.addEventListener('scrollend', settle);
-    return () => {
-      window.clearTimeout(settleTimer);
-      track.removeEventListener('scroll', updateActiveIndex);
-      track.removeEventListener('scrollend', settle);
-    };
-  }, [commitLoopIndex, getCenteredIndex, isDesktop, jumpToLoopIndex]);
+    updateOffset(normalized);
+  }, [commitLoopIndex, isDesktop, updateOffset]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
-    if (!viewport || !isDesktop) return;
-
-    const onWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      if (wheelLockRef.current || dragRef.current.isDragging) return;
-
-      const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-      if (Math.abs(delta) < 12) return;
-
-      wheelLockRef.current = true;
-      goTo(loopIndexRef.current + (delta > 0 ? 1 : -1));
-      window.setTimeout(() => {
-        wheelLockRef.current = false;
-      }, DESKTOP_SLIDE_MS);
-    };
+    if (!viewport) return;
 
     const onPointerDown = (event: PointerEvent) => {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
@@ -331,10 +230,10 @@ export default function Projects() {
       setTrackOffset(nextOffset);
     };
 
-    const onPointerUp = (event: PointerEvent) => {
+    const onPointerUp = () => {
       if (!dragRef.current.isDragging) return;
 
-      const delta = event.clientX - dragRef.current.startX;
+      const delta = trackOffsetRef.current - dragRef.current.startOffset;
       dragRef.current.isDragging = false;
       setIsDragging(false);
 
@@ -343,40 +242,40 @@ export default function Projects() {
         return;
       }
 
-      updateDesktopOffset(loopIndexRef.current);
+      updateOffset(loopIndexRef.current);
     };
 
-    viewport.addEventListener('wheel', onWheel, { passive: false });
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      window.scrollBy(0, event.deltaY);
+    };
+
     viewport.addEventListener('pointerdown', onPointerDown);
     viewport.addEventListener('pointermove', onPointerMove);
     viewport.addEventListener('pointerup', onPointerUp);
     viewport.addEventListener('pointercancel', onPointerUp);
+    viewport.addEventListener('wheel', onWheel, { passive: false });
 
     return () => {
-      viewport.removeEventListener('wheel', onWheel);
       viewport.removeEventListener('pointerdown', onPointerDown);
       viewport.removeEventListener('pointermove', onPointerMove);
       viewport.removeEventListener('pointerup', onPointerUp);
       viewport.removeEventListener('pointercancel', onPointerUp);
+      viewport.removeEventListener('wheel', onWheel);
       window.clearTimeout(normalizeTimerRef.current);
     };
-  }, [goTo, isDesktop, updateDesktopOffset]);
+  }, [goTo, updateOffset]);
 
   useEffect(() => {
     const onResize = () => {
       const normalized = normalizeLoopIndex(loopIndexRef.current);
       commitLoopIndex(normalized);
-
-      if (isDesktopViewport()) {
-        updateDesktopOffset(normalized);
-      } else {
-        scrollToIndex(normalized, 'auto');
-      }
+      updateOffset(normalized);
     };
 
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, [commitLoopIndex, scrollToIndex, updateDesktopOffset]);
+  }, [commitLoopIndex, updateOffset]);
 
   return (
     <section className={styles.section} id="projects">
@@ -391,10 +290,10 @@ export default function Projects() {
             <ul
               ref={trackRef}
               className={`${styles.track} ${isDragging ? styles.trackDragging : ''} ${isJumping ? styles.trackJump : ''}`}
-              style={isDesktop ? { transform: `translate3d(${trackOffset}px, 0, 0)` } : undefined}
+              style={{ transform: `translate3d(${trackOffset}px, 0, 0)` }}
               aria-label="Карусель реалізованих проєктів"
             >
-              {slides.map((slide) => (
+              {slides.map(slide => (
                 <li
                   key={`${slide.project.srcDesktop}-${slide.copy}`}
                   className={`${styles.card} ${getCardClass(slide.loopIndex, loopIndex)}`}

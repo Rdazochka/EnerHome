@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import HashLink from '@/components/HashLink';
 import styles from './MobileMenu.module.css';
 
 export type MobileNavItem = {
@@ -52,18 +53,29 @@ export default function MobileMenu({
 
           <ul className={styles.list}>
             <li>
-              <a href="#hero" className={styles.item} onClick={onClose} aria-label="Головна">
+              <HashLink
+                href="#hero"
+                className={styles.item}
+                delay={140}
+                onClick={onClose}
+                aria-label="Головна"
+              >
                 <svg className={styles.homeIcon} width="20" height="20" aria-hidden="true">
                   <use href="/sprites.svg#icon-home" />
                 </svg>
-              </a>
+              </HashLink>
             </li>
 
             {navItems.map(item => (
               <li key={item.href}>
-                <a href={item.href} className={styles.item} onClick={onClose}>
+                <HashLink
+                  href={item.href}
+                  className={styles.item}
+                  delay={140}
+                  onClick={onClose}
+                >
                   {item.label}
-                </a>
+                </HashLink>
               </li>
             ))}
           </ul>

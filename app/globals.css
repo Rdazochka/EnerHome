@@ -13,6 +13,19 @@
 *::after {
   margin: 0;
   padding: 0;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+html {
+  scroll-behavior: auto;
+  scroll-padding-top: var(--header-height, 45px);
+  -ms-overflow-style: none;
 }
 
 :root {
