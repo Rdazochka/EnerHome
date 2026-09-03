@@ -1,0 +1,330 @@
+.systemSelection {
+  padding: 16px 12px;
+  background: var(--color-background-2);
+}
+
+.systemSelection_content {
+  width: 351px;
+  padding: 16px 12px;
+  margin: 0 auto;
+  border-radius: 16px;
+  background: var(--color-background-3);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.systemSelection_inner {
+  width: 327px;
+  min-height: 604px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  background: var(--color-background-4);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.systemSelection_title {
+  font-family: var(--font-ibm-plex-serif);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 114%;
+  text-align: center;
+  color: var(--color-white);
+  margin: 0 0 24px;
+}
+
+.systemSelection_subtitle {
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--color-white);
+  margin: 0 0 16px;
+}
+
+.systemSelection_text {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
+  color: var(--color-white);
+  margin: 0 0 24px;
+}
+
+.systemSelection_question {
+  width: 303px;
+  padding: 16px 12px 22px;
+
+  border: 1px solid var(--color-white);
+  border-radius: 16px;
+
+  background: var(--color-background-1);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.systemSelection_questionTitle {
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--color-text-accent);
+  margin: 0;
+}
+
+.systemSelection_content_question {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
+  color: var(--color-text);
+
+  margin: 20px 0 0;
+}
+
+.systemSelection_content_options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  margin-top: 12px;
+}
+
+.systemSelection_content_option {
+  display: flex;
+  align-items: center;
+
+  width: 277px;
+  height: 48px;
+  padding: 12px;
+
+  border: 1px solid var(--color-button);
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.systemSelection_content_button {
+  display: block;
+  width: 277px;
+  height: 56px;
+  margin: 24px auto 0;
+
+  padding: 16px 44px;
+  border: none;
+  background: transparent;
+
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-button);
+
+  text-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+/*/////*/
+.systemSelection_content_optionIcon {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.systemSelection_content_optionIcon svg {
+  position: absolute;
+  display: block;
+}
+
+.systemSelection_content_optionIcon svg:first-child {
+  width: 22px;
+  height: 22px;
+  top: 0;
+  left: 0;
+}
+
+.systemSelection_content_optionIcon .systemSelection_content_optionIconFill {
+  width: 12px;
+  height: 12px;
+  top: 5px;
+  left: 5px;
+}
+
+.systemSelection_content_optionText {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  color: var(--color-text);
+  text-align: center;
+  margin-left: 15px;
+}
+@media screen and (min-width: 768px) {
+  .systemSelection_inner {
+    width: 100%;
+    min-height: 688px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-size: 810px 735px;
+    background-image: url('/images/services/background.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .systemSelection_content {
+    width: 803px;
+    padding: 22px 16px;
+    margin: 0 auto 24px;
+  }
+
+  .systemSelection_title {
+    max-width: 462px;
+    margin: 0 auto;
+    font-size: 32px;
+    line-height: 138%;
+    margin-bottom: 24px;
+  }
+
+  .systemSelection_subtitle {
+    font-size: 30px;
+    line-height: 133%;
+  }
+
+  .systemSelection_text {
+    font-size: 24px;
+    line-height: 121%;
+    width: 100%;
+    max-width: 484px;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+
+  .systemSelection_question {
+    width: 575px;
+    padding: 22px 9px;
+    background: var(--color-background-2);
+  }
+
+  .systemSelection_questionTitle {
+    font-size: 28px;
+    line-height: 121%;
+  }
+
+  .systemSelection_content_question {
+    font-size: 24px;
+    line-height: 121%;
+  }
+
+  .systemSelection_content_options {
+    align-items: center;
+    gap: 12px;
+    width: 364px;
+    height: 126px;
+    margin: 24px auto 0;
+  }
+
+  .systemSelection_content_option {
+    width: 100%;
+    height: 57px;
+  }
+
+  .systemSelection_content_optionText {
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    color: var(--color-text);
+    margin-left: 15px;
+  }
+
+  .systemSelection_content_button {
+    width: 310px;
+    height: 56px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .systemSelection {
+    padding: 44px 50px;
+  }
+
+  .systemSelection_content {
+    width: 100%;
+    padding: 44px 50px;
+  }
+
+  .systemSelection_inner {
+    display: block;
+    min-height: unset;
+    padding-bottom: 52px;
+
+    background-image: url('/images/services/background-desktop.webp');
+    background-repeat: no-repeat;
+    background-position: center bottom -52px;
+    background-size: 103% auto;
+  }
+
+  .systemSelection_title {
+    width: 100%;
+    max-width: none;
+    font-size: 38px;
+    line-height: 126%;
+    margin: 44px 0 53px 50px;
+    text-align: left;
+  }
+
+  .systemSelection_info {
+    min-width: 484px;
+    padding-left: 50px;
+  }
+
+  .systemSelection_subtitle {
+    text-align: left;
+
+    font-size: 28px;
+    line-height: 121%;
+  }
+
+  .systemSelection_text {
+    text-align: left;
+  }
+
+  .systemSelection_row {
+    display: flex;
+
+    gap: 24px;
+  }
+
+  .systemSelection_question {
+    width: 632px;
+    padding: 0;
+  }
+
+  .systemSelection_questionTitle {
+    margin-top: 42px;
+    margin-bottom: 44px;
+  }
+
+  .systemSelection_content_question {
+    margin-bottom: 28px;
+  }
+
+  .systemSelection_content_options {
+    gap: 16px;
+    margin-bottom: 44px;
+  }
+
+  .systemSelection_content_button {
+    font-size: 20px;
+    line-height: 120%;
+    width: 256px;
+    padding: 0;
+    margin-bottom: 42px;
+  }
+}

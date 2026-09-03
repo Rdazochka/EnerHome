@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import SystemSelection from '@/components/SystemSelection/SystemSelection';
+import SystemSelectionQuiz from '@/components/SystemSelectionQuiz/SystemSelectionQuiz';
 import Solutions from '@/components/Solutions/Solutions';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import Projects from '@/components/Projects/Projects';
@@ -22,7 +23,8 @@ export default function Home() {
 
       <main>
         <Hero onConsultationClick={() => setIsModalOpen(true)} />
-        <SystemSelection />
+        <SystemSelection onConsultationClick={() => setIsModalOpen(true)} />
+        <SystemSelectionQuiz />
         <Solutions />
         <HowItWorks />
         <Projects />
@@ -33,10 +35,7 @@ export default function Home() {
 
       <Footer />
 
-      <ConsultationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <ConsultationModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

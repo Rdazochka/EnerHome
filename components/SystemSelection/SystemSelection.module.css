@@ -1,1 +1,155 @@
+.section {
+  width: 100%;
+  background: var(--color-background);
+}
 
+.container {
+  padding: 32px 16px;
+}
+
+.title {
+  font-family: var(--font-ibm-plex-serif);
+  font-weight: 500;
+  max-width: 329px;
+  font-size: 28px;
+  line-height: 114%;
+  text-align: center;
+  color: var(--color-text-accent);
+  margin-bottom: 40px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 14px;
+  max-width: 343px;
+
+  border: 2px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.cardTitle {
+  font-family: var(--font-ibm-plex-serif);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 125%;
+  text-align: center;
+  color: var(--color-text-accent);
+  margin-bottom: 16px;
+}
+
+.cardDescription {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
+  color: #000;
+  margin-bottom: 32px;
+}
+
+.cardCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 311px;
+
+  padding: 16px 30px;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 138%;
+  color: var(--color-white);
+  background: var(--color-button);
+  border: 1px solid var(--color-background-2);
+  border-radius: 16px;
+  box-shadow: 4px 4px 16px 0 rgba(1, 73, 61, 0.4);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cardCta:hover {
+  background: var(--color-background-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 44px 32px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: 138%;
+    max-width: 622px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cards {
+    gap: 24px;
+    align-items: center;
+  }
+
+  .card {
+    padding: 34px 25px;
+    max-width: 574px;
+  }
+
+  .cardTitle {
+    font-size: 30px;
+    line-height: 133%;
+  }
+
+  .cardDescription {
+    font-size: 24px;
+    line-height: 121%;
+  }
+
+  .cardCta {
+    font-size: 20px;
+    line-height: 120%;
+    padding: 16px 44px;
+    width: auto;
+    max-width: 401px;
+  }
+}
+
+@media (min-width: 1140px) {
+  .container {
+    padding: 88px 100px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 126%;
+    max-width: 748px;
+    text-align: left;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .cards {
+    flex-direction: row;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .card {
+    padding: 34px 40px;
+    max-width: 608px;
+  }
+
+  .cardTitle {
+    font-size: 32px;
+    line-height: 131%;
+  }
+}
