@@ -5,23 +5,25 @@ import type { ReactNode } from 'react';
 
 const montserrat = Montserrat({
   subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-montserrat',
 });
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-inter',
 });
 
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ['latin', 'cyrillic'],
-  weight: ['500', '700'],
+  weight: ['400', '500', '700'],
   variable: '--font-ibm-plex-serif',
 });
 
 const roboto = Roboto({
   subsets: ['latin', 'cyrillic'],
-  weight: ['700'],
+  weight: ['400', '500', '700'],
   variable: '--font-roboto',
 });
 
