@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { FormEvent, useEffect, useState } from 'react';
 import styles from './SystemSelectionModal.module.css';
 
 type SystemSelectionModalQuizProps = {
@@ -17,6 +19,12 @@ export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionMod
     };
   }, []);
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (phone.length === 0) return;
+    onClose();
+  };
+
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
@@ -28,7 +36,7 @@ export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionMod
 
         <h2 className={styles.title}>Підберіть систему під свій будинок</h2>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.question}>
             <p className={styles.questionTitle}>1. Який у вас тип будинку?</p>
 
@@ -42,7 +50,7 @@ export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionMod
 
               <label className={styles.option}>
                 <input type="radio" name="houseType" defaultChecked />
-                <span>Замiський будинок</span>
+                <span>Заміський будинок</span>
               </label>
 
               <label className={styles.option}>

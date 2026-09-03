@@ -10,8 +10,8 @@ export default function Hero({ onConsultationClick }: HeroProps) {
   return (
     <section className={styles.hero} id="hero">
       <picture className={styles.picture}>
-        <source media="(min-width: 1140px)" srcSet="/hero-desk.png" />
-        <source media="(min-width: 768px)" srcSet="/hero-tab.png" />
+        <source media="(min-width: 1440px)" srcSet="/hero-desk.png" />
+        <source media="(min-width: 834px)" srcSet="/hero-tab.png" />
         <img
           src="/hero-mob.png"
           alt="Сучасний енергоефективний будинок з сонячними панелями"

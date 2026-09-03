@@ -1,61 +1,62 @@
 .section {
   width: 100%;
-  background: var(--color-background);
+  background: var(--background);
 }
 
 .frame1 {
+  width: 100%;
   max-width: 375px;
   margin: 0 auto;
   padding: 16px 12px;
-  background: var(--color-background-2);
+  background: var(--background-2);
 }
 
 .frame2 {
   border-radius: 16px;
   padding: 16px 12px;
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-  background: var(--color-background-3);
+  background: var(--background-3);
 }
 
 .frame3 {
   border-radius: 16px;
   padding: 16px 12px;
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-  background: var(--color-background-4);
+  background: var(--background-4);
 }
 
 .title {
-  font-family: var(--font-ibm-plex-serif);
+  font-family: var(--second-family);
   font-weight: 500;
   font-size: 32px;
   line-height: 138%;
   text-align: center;
-  color: var(--color-white);
+  color: var(--white);
   margin-bottom: 16px;
 }
 
 .content {
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-  background: var(--color-background-2);
+  background: var(--background-2);
   border-radius: 16px;
   padding: 16px 12px;
 }
 
 .frame4 {
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--white);
   border-radius: 16px;
   padding: 0px 8px;
 
-  background: var(--color-background-2);
+  background: var(--background-2);
 }
 
 .subtitle {
-  font-family: var(--font-ibm-plex-serif);
+  font-family: var(--second-family);
   font-weight: 500;
   font-size: 24px;
   line-height: 125%;
   text-align: center;
-  color: var(--color-text-accent);
+  color: var(--tekst-akcent);
   max-width: 253px;
 }
 
@@ -74,26 +75,27 @@
   align-items: flex-start;
   gap: 6px;
   padding: 12px 8px;
+  width: 100%;
   max-width: 285px;
-  border: 1px solid var(--color-button);
+  border: 1px solid var(--button);
   border-radius: 16px;
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
-  background: var(--color-white);
+  background: var(--white);
 }
 
 .number {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 700;
   font-size: 24px;
   line-height: 117%;
   letter-spacing: 0.02em;
   text-align: center;
-  color: var(--color-button);
+  color: var(--button);
   flex-shrink: 0;
 }
 
 .stepContent {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 122%;
@@ -103,7 +105,7 @@
 
 
 /* Tablet */
-@media (min-width: 768px) {
+@media (min-width: 834px) {
   .frame1 {
     max-width: 834px;
     padding: 22px 16px;
@@ -118,11 +120,11 @@
   }
 
   .title {
-    font-family: var(--font-ibm-plex-serif);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 32px;
     line-height: 138%;
-    color: var(--color-white);
+    color: var(--white);
     text-align: left;
     margin-bottom: 24px;
   }
@@ -133,7 +135,7 @@
     align-items: center;
     padding: 44px 40px;
     border-radius: 16px;
-    background: var(--color-background-2);
+    background: var(--background-2);
     box-shadow: none;
   }
 
@@ -147,12 +149,12 @@
   }
 
   .subtitle {
-    font-family: var(--font-ibm-plex-serif);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 30px;
     line-height: 133%;
     text-align: center;
-    color: var(--color-text-accent);
+    color: var(--tekst-akcent);
     max-width: 312px;
     margin-bottom: 32px;
   }
@@ -169,17 +171,17 @@
   }
 
   .number {
-    font-family: var(--font-montserrat);
+    font-family: var(--font-family);
     font-weight: 700;
     font-size: 40px;
     line-height: 102%;
     letter-spacing: 0.02em;
     text-align: center;
-    color: var(--color-button);
+    color: var(--button);
   }
 
   .stepContent {
-    font-family: var(--font-montserrat);
+    font-family: var(--font-family);
     font-weight: 400;
     font-size: 24px;
     line-height: 121%;
@@ -188,7 +190,7 @@
 }
 
 /* Desktop */
-@media (min-width: 1140px) {
+@media (min-width: 1440px) {
   .frame1 {
     max-width: 1440px;
     padding: 48px;
@@ -203,18 +205,18 @@
   }
 
   .title {
-    font-family: var(--font-ibm-plex-serif);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 38px;
     line-height: 126%;
-    color: var(--color-white);
+    color: var(--white);
     margin-bottom: 32px;
   }
 
   .content {
     padding: 44px 40px;
     box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
-    background: var(--color-background-2);
+    background: var(--background-2);
     border-radius: 16px;
   }
 
@@ -227,11 +229,11 @@
   }
 
   .subtitle {
-    font-family: var(--font-ibm-plex-serif);
+    font-family: var(--second-family);
     font-weight: 500;
     font-size: 32px;
     line-height: 131%;
-    color: var(--color-text-accent);
+    color: var(--tekst-akcent);
     max-width: none;
     margin-bottom: 32px;
   }
@@ -256,17 +258,17 @@
   }
 
   .number {
-    font-family: var(--font-montserrat);
+    font-family: var(--font-family);
     font-weight: 700;
     font-size: 40px;
     line-height: 102%;
     letter-spacing: 0.02em;
     text-align: center;
-    color: var(--color-button);
+    color: var(--button);
   }
 
   .stepContent {
-    font-family: var(--font-montserrat);
+    font-family: var(--font-family);
     font-weight: 400;
     font-size: 24px;
     line-height: 121%;

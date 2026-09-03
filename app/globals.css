@@ -1,84 +1,61 @@
+@import 'modern-normalize/modern-normalize.css';
+
+/*
+  GoIT layout standards (EnerHome):
+  - Breakpoints: 375 mobile / 834 tablet / 1440 desktop
+  - Mobile-first: only min-width media queries
+  - Fluid layout between breakpoints
+  - Section styles live in *.module.css
+*/
+
 :root {
-  /* Base */
-  --color-white: #ffffff;
-  --color-text: #001202;
-
-  /* Text accent */
-  --color-text-accent: #2f5803;
-
-  /* Backgrounds */
-  --color-background: #f8fffa;
-  --color-background-1: #ecfdef;
-  --color-background-2: #e0fee7;
-  --color-background-3: #7be191;
-  --color-background-4: #027965;
-
-  /* UI */
-  --color-button: #3aa150;
-  --color-border: #6cbb72;
-
-  /* Effects */
-  --color-glass: rgba(1, 15, 7, 0.32);
-
-  /* Error */
-  --color-error: #E53935;
+  --white: #fff;
+  --background: #f8fffa;
+  --background-1: #ecfdef;
+  --background-2: #e0fee7;
+  --background-3: #7be191;
+  --border: #6cbb72;
+  --button: #3aa150;
+  --rural-silhouette-landscape-vector: #199981;
+  --background-4: #027965;
+  --tekst-akcent: #2f5803;
+  --text: #001202;
+  --glass: rgba(1, 15, 7, 0.32);
+  --error: #ef3f1b;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol {
-  margin: 0;
-}
-
-html,
-body {
-  width: 100%;
+:root {
+  --font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+  --second-family: var(--font-ibm-plex-serif), 'IBM Plex Serif', sans-serif;
+  --third-family: var(--font-inter), 'Inter', sans-serif;
+  --font3: var(--font-roboto), 'Roboto', sans-serif;
 }
 
 body {
   min-height: 100vh;
-  font-family: var(--font-montserrat), sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-background);
-}
-
-img,
-picture {
-  display: block;
-  max-width: 100%;
-}
-
-img {
-  height: auto;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
+  font-family: var(--font-family), sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  background-color: var(--background);
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
 ul,
 ol {
+  list-style: none;
   margin: 0;
   padding: 0;
+}
+
+button {
+  cursor: pointer;
 }
 
 .container {
@@ -87,16 +64,16 @@ ol {
   padding-inline: 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 834px) {
   .container {
-    max-width: 768px;
+    max-width: 834px;
     padding-inline: 32px;
   }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
   .container {
-    max-width: 1200px;
-    padding-inline: 40px;
+    max-width: 1440px;
+    padding-inline: 100px;
   }
 }

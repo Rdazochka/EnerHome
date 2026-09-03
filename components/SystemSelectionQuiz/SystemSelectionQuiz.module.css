@@ -1,84 +1,89 @@
 .systemSelection {
   padding: 16px 12px;
-  background: var(--color-background-2);
+  background: var(--background-2);
 }
 
 .systemSelection_content {
-  width: 351px;
+  width: 100%;
+  max-width: 351px;
   padding: 16px 12px;
   margin: 0 auto;
   border-radius: 16px;
-  background: var(--color-background-3);
+  background: var(--background-3);
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
 }
 
 .systemSelection_inner {
-  width: 327px;
+  width: 100%;
+  max-width: 327px;
   min-height: 604px;
   padding: 16px 12px;
+  margin: 0 auto;
   border-radius: 16px;
-  background: var(--color-background-4);
+  background: var(--background-4);
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
 }
 
 .systemSelection_title {
-  font-family: var(--font-ibm-plex-serif);
+  font-family: var(--second-family);
   font-weight: 500;
   font-size: 28px;
   line-height: 114%;
   text-align: center;
-  color: var(--color-white);
+  color: var(--white);
   margin: 0 0 24px;
 }
 
 .systemSelection_subtitle {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 24px;
   line-height: 125%;
   text-align: center;
-  color: var(--color-white);
+  color: var(--white);
   margin: 0 0 16px;
 }
 
 .systemSelection_text {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 122%;
   text-align: center;
-  color: var(--color-white);
+  color: var(--white);
   margin: 0 0 24px;
 }
 
 .systemSelection_question {
-  width: 303px;
+  width: 100%;
+  max-width: 303px;
   padding: 16px 12px 22px;
+  margin: 0 auto;
 
-  border: 1px solid var(--color-white);
+  border: 1px solid var(--white);
   border-radius: 16px;
 
-  background: var(--color-background-1);
+  background: var(--background-1);
   box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
 }
 
 .systemSelection_questionTitle {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 500;
   font-size: 24px;
   line-height: 125%;
   text-align: center;
-  color: var(--color-text-accent);
+  color: var(--tekst-akcent);
   margin: 0;
 }
 
 .systemSelection_content_question {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 122%;
   text-align: center;
-  color: var(--color-text);
+  color: var(--text);
 
   margin: 20px 0 0;
 }
@@ -95,19 +100,21 @@
   display: flex;
   align-items: center;
 
-  width: 277px;
+  width: 100%;
+  max-width: 277px;
   height: 48px;
   padding: 12px;
 
-  border: 1px solid var(--color-button);
+  border: 1px solid var(--button);
   border-radius: 16px;
-  background: var(--color-white);
+  background: var(--white);
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
 }
 
 .systemSelection_content_button {
   display: block;
-  width: 277px;
+  width: 100%;
+  max-width: 277px;
   height: 56px;
   margin: 24px auto 0;
 
@@ -115,11 +122,11 @@
   border: none;
   background: transparent;
 
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 600;
   font-size: 16px;
   line-height: 150%;
-  color: var(--color-button);
+  color: var(--button);
 
   text-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
   cursor: pointer;
@@ -154,17 +161,18 @@
 }
 
 .systemSelection_content_optionText {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-family);
   font-weight: 400;
   font-size: 18px;
   line-height: 122%;
-  color: var(--color-text);
+  color: var(--text);
   text-align: center;
   margin-left: 15px;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 834px) {
   .systemSelection_inner {
     width: 100%;
+    max-width: none;
     min-height: 688px;
 
     display: flex;
@@ -178,7 +186,8 @@
   }
 
   .systemSelection_content {
-    width: 803px;
+    width: 100%;
+    max-width: 803px;
     padding: 22px 16px;
     margin: 0 auto 24px;
   }
@@ -206,9 +215,10 @@
   }
 
   .systemSelection_question {
-    width: 575px;
+    width: 100%;
+    max-width: 575px;
     padding: 22px 9px;
-    background: var(--color-background-2);
+    background: var(--background-2);
   }
 
   .systemSelection_questionTitle {
@@ -235,11 +245,11 @@
   }
 
   .systemSelection_content_optionText {
-    font-family: var(--font-montserrat);
+    font-family: var(--font-family);
     font-weight: 400;
     font-size: 24px;
     line-height: 121%;
-    color: var(--color-text);
+    color: var(--text);
     margin-left: 15px;
   }
 
