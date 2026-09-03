@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Image from 'next/image';
+import { useState, useEffect, useRef } from 'react';
 import styles from './Header.module.css';
+import MobileMenu from './Mobile-menu/MobileMenu';
 
 const navItems = [
   { href: '#hero', label: 'Про нас' },
@@ -15,8 +15,17 @@ interface HeaderProps {
   onConsultationClick?: () => void;
 }
 
+function Logo({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="78" height="35" aria-hidden="true" focusable="false">
+      <use href="/sprites.svg#icon-logo" />
+    </svg>
+  );
+}
+
 export default function Header({ onConsultationClick }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -29,113 +38,70 @@ export default function Header({ onConsultationClick }: HeaderProps) {
     };
   }, [isMenuOpen]);
 
-  const handleLinkClick = () => {
-    setIsMenuOpen(false);
-  };
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header) return;
+
+    const syncHeight = () => {
+      document.documentElement.style.setProperty(
+        '--header-height',
+        `${header.offsetHeight}px`
+      );
+    };
+
+    syncHeight();
+    const observer = new ResizeObserver(syncHeight);
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <header className={styles.header}>
-      <div className={styles.container}>
-        <a href="#hero" className={styles.logo}>
-          <Image
-            src="/Logo.png"
-            alt="EnerHome"
-            width={118}
-            height={54}
-            className={styles.logoImg}
-          />
-        </a>
-
-        <nav className={styles.nav}>
-          <a href="#hero" className={styles.navHomeIcon}>
-            <svg width="24" height="24">
-              <use href="/sprites.svg#icon-home" />
-            </svg>
+    <>
+      <header ref={headerRef} className={styles.header}>
+        <div className={styles.container}>
+          <a href="#hero" className={styles.logo} aria-label="EnerHome">
+            <Logo className={styles.logoImg} />
           </a>
-          {navItems.map(item => (
-            <a key={item.href} href={item.href} className={styles.navLink}>
-              {item.label}
+
+          <nav className={styles.nav}>
+            <a href="#hero" className={styles.navHomeIcon}>
+              <svg width="24" height="24">
+                <use href="/sprites.svg#icon-home" />
+              </svg>
             </a>
-          ))}
-        </nav>
+            {navItems.map(item => (
+              <a key={item.href} href={item.href} className={styles.navLink}>
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        <button className={styles.cta} onClick={onConsultationClick}>
-          Консультація
-        </button>
-
-        <button
-          className={styles.burger}
-          onClick={() => setIsMenuOpen(true)}
-          aria-label="Відкрити меню"
-        >
-          <svg className={styles.burgerIcon}>
-            <use href="/sprites.svg#icon-burger" />
-          </svg>
-        </button>
-      </div>
-
-      <div
-        className={`${styles.overlay} ${isMenuOpen ? styles.overlayActive : ''}`}
-        onClick={() => setIsMenuOpen(false)}
-      />
-
-      <div className={`${styles.mobileMenu} ${isMenuOpen ? styles.mobileMenuActive : ''}`}>
-        <div className={styles.mobileMenuHeader}>
-          <a href="#hero" className={styles.logo} onClick={handleLinkClick}>
-            <Image
-              src="/Logo.png"
-              alt="EnerHome"
-              width={118}
-              height={54}
-              className={styles.mobileLogo}
-            />
-          </a>
-
-          <button
-            className={styles.closeBtn}
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Закрити меню"
-          >
-            <svg className={styles.closeIcon}>
-              <use href="/sprites.svg#icon-close" />
-            </svg>
-          </button>
-        </div>
-
-        <nav className={styles.mobileNav}>
-          <div className={styles.mobileMenuTitle}>Меню</div>
-          <div className={styles.mobileMenuLine} />
-
-          <a href="#hero" className={styles.mobileNavItem} onClick={handleLinkClick}>
-            <svg className={styles.mobileNavIcon}>
-              <use href="/sprites.svg#icon-home" />
-            </svg>
-          </a>
-
-          {navItems.map(item => (
-            <a
-              key={item.href}
-              href={item.href}
-              className={styles.mobileNavItem}
-              onClick={handleLinkClick}
-            >
-              <span className={styles.mobileNavLink}>{item.label}</span>
-            </a>
-          ))}
-        </nav>
-
-        <div className={styles.mobileCtaWrapper}>
-          <button
-            className={styles.mobileCta}
-            onClick={() => {
-              onConsultationClick?.();
-              setIsMenuOpen(false);
-            }}
-          >
+          <button className={styles.cta} onClick={onConsultationClick}>
             Консультація
           </button>
+
+          <button
+            className={styles.burger}
+            onClick={() => setIsMenuOpen(open => !open)}
+            aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}
+            aria-expanded={isMenuOpen}
+          >
+            <svg
+              className={isMenuOpen ? styles.closeIcon : styles.burgerIcon}
+              aria-hidden="true"
+            >
+              <use href={isMenuOpen ? '/sprites.svg#icon-close' : '/sprites.svg#icon-burger'} />
+            </svg>
+          </button>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <MobileMenu
+        isOpen={isMenuOpen}
+        navItems={navItems}
+        onClose={() => setIsMenuOpen(false)}
+        onConsultationClick={onConsultationClick}
+      />
+    </>
   );
 }

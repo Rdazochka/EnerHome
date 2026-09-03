@@ -12,7 +12,7 @@ import About from '@/components/About/About';
 import FAQ from '@/components/FAQ/FAQ';
 import ConsultationCTA from '@/components/ConsultationCTA/ConsultationCTA';
 import Footer from '@/components/Footer/Footer';
-import ConsultationModal from '@/components/ConsultationModal/ConsultationModal';
+import ConsultationModal from '@/components/Header/ConsultationModal/ConsultationModal';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
