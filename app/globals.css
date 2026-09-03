@@ -1,0 +1,102 @@
+:root {
+  /* Base */
+  --color-white: #ffffff;
+  --color-text: #001202;
+
+  /* Text accent */
+  --color-text-accent: #2f5803;
+
+  /* Backgrounds */
+  --color-background: #f8fffa;
+  --color-background-1: #ecfdef;
+  --color-background-2: #e0fee7;
+  --color-background-3: #7be191;
+  --color-background-4: #027965;
+
+  /* UI */
+  --color-button: #3aa150;
+  --color-border: #6cbb72;
+
+  /* Effects */
+  --color-glass: rgba(1, 15, 7, 0.32);
+
+  /* Error */
+  --color-error: #E53935;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+  margin: 0;
+}
+
+html,
+body {
+  width: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-montserrat), sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+img,
+picture {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding-inline: 16px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-inline: 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    padding-inline: 40px;
+  }
+}

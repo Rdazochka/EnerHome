@@ -1,0 +1,588 @@
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.45);
+  overscroll-behavior: contain;
+}
+
+.modal {
+  position: relative;
+  box-sizing: border-box;
+  width: 343px;
+  max-height: calc(100vh - 32px);
+  padding: 32px 16px;
+  overflow-y: auto;
+  border-radius: 16px;
+  border: 1px solid var(--color-white);
+  background: var(--color-background-1);
+  box-shadow: 4px 4px 16px 0 rgba(0, 0, 0, 0.25);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.closeButton svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-family: var(--font-ibm-plex-serif);
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 114%;
+  text-align: center;
+  margin-right: 16px;
+  margin-left: 16px;
+  margin-bottom: 24px;
+  color: var(--color-text-accent);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.question {
+  width: 100%;
+}
+
+.questionTitle {
+  margin-bottom: 7px;
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 127%;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.hint {
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-background-4);
+  margin-bottom: 16px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid var(--color-button);
+  border-radius: 16px;
+  background: var(--color-white);
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.option input {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin: 0 6px 0 0;
+  accent-color: var(--color-button);
+}
+
+.option span {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.desktopLineBreak {
+  display: none;
+}
+
+.ownEnergyOption span {
+  display: block;
+  flex: 1;
+  text-align: left;
+}
+
+.submitButton {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 12px;
+  background: var(--color-button);
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.checkboxOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.checkboxOption {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 20px;
+  cursor: pointer;
+}
+
+.checkboxOption input {
+  width: 14px;
+  height: 14px;
+  margin: 0 6px 0 0;
+  accent-color: var(--color-button);
+}
+
+.checkboxOption span {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+
+  color: var(--color-text);
+}
+
+.phoneField {
+  width: 100%;
+}
+
+.phoneTitle {
+  margin-bottom: 7px;
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--color-text);
+}
+
+.phoneHint {
+  margin: 0px 0 12px;
+  font-family: var(--font-montserrat);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--color-background-4);
+}
+
+.phoneInputWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--color-button);
+  border-radius: 8px;
+
+  background: var(--color-white);
+}
+
+.phoneIcon {
+  margin-right: 5px;
+
+  font-size: 14px;
+
+  color: var(--color-button);
+}
+
+.phoneCode {
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.phoneInput {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 4px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 122%;
+  color: var(--color-text);
+}
+
+.submitButton:disabled {
+  background: #d3d9d6;
+  color: var(--color-white);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.agreement {
+  margin: -4px 0 0;
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--color-text-accent);
+}
+
+.phoneValid {
+  border-color: var(--color-button);
+}
+
+.phoneInvalid {
+  border-color: var(--color-error);
+}
+
+.phoneError {
+  margin: 4px 0 0;
+
+  font-family: var(--font-montserrat);
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 120%;
+  text-align: center;
+
+  color: #ff5c5c;
+}
+
+@media screen and (max-width: 767px) {
+  
+  .modal {
+    box-sizing: border-box;
+    width: calc(100% - 32px);
+    max-width: 343px;
+  }
+
+  .modalOverlay {
+    overflow-x: hidden;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .desktopLineBreak {
+    display: block;
+  }
+
+  .modal {
+    width: 100%;
+    padding: 53px 33px;
+  }
+
+  .title {
+    font-family: var(--font-ibm-plex-serif);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 138%;
+    color: var(--color-text-accent);
+    text-align: left;
+    margin-left: 0;
+  }
+
+  .form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    column-gap: 8px;
+    row-gap: 20px;
+  }
+
+  .phoneField,
+  .submitButton,
+  .agreement {
+    grid-column: 1 / -1;
+  }
+
+  .submitButton {
+    width: 256px;
+    justify-self: center;
+  }
+
+  .questionTitle {
+    text-align: left;
+    font-family: var(--font-montserrat);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 142%;
+    color: #000;
+  }
+
+  .hint {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: var(--color-background-4);
+  }
+
+  .question:nth-child(6) .hint {
+    margin-bottom: 12px;
+  }
+
+  .question:first-child .options {
+    margin-top: 56px;
+  }
+
+  .question:nth-child(2) .options {
+    margin-top: 16px;
+  }
+
+  .option {
+    min-height: 36px;
+    padding: 6px 10px;
+    height: 47px;
+  }
+
+  .ownEnergyOption {
+    height: auto;
+    min-height: 76px;
+  }
+
+  .option input {
+    width: 16px;
+    height: 16px;
+  }
+
+  .option span {
+    font-family: var(---font-montserrat);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    text-align: center;
+    color: #000;
+  }
+
+  .submitButton {
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .checkboxOption span {
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    color: #000;
+  }
+
+  .phoneTitle {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 142%;
+    color: #000;
+    margin-left: 188px;
+  }
+
+  .phoneHint {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: var(--color-background-4);
+    margin-left: 188px;
+  }
+
+  .phoneInputWrapper {
+    height: 48px;
+  }
+
+  .phoneCode,
+  .phoneInput {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    text-align: left;
+    color: #000;
+  }
+
+  .submitButton {
+    height: 52px;
+
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 120%;
+    color: var(--color-white);
+  }
+
+  .agreement {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 122%;
+    text-align: center;
+    color: var(--color-text-accent);
+  }
+
+  .submitButton {
+    margin-top: 28px;
+  }
+
+  .agreement {
+    width: 372px;
+    height: 44px;
+    margin-top: -12px;
+    justify-self: center;
+  }
+
+  .phoneInputWrapper {
+    position: relative;
+    width: 395px;
+    height: 63px;
+    margin: 0 auto;
+    padding-top: 17px;
+    padding-left: 46px;
+    padding-bottom: 17px;
+  }
+
+  .phoneInputWrapper::after {
+    position: absolute;
+    bottom: 10px;
+    left: 46px;
+    width: 329px;
+    height: 2px;
+    content: '';
+    background: var(--color-text-accent);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .form {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 24px;
+  }
+
+  .phoneTitle {
+    margin-left: 0;
+    margin-top: 22px;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 121%;
+  }
+  .phoneHint {
+    margin-left: 0;
+  }
+
+  .question:nth-child(1) .questionTitle {
+    margin-bottom: 7px;
+  }
+
+  .question:nth-child(2) .questionTitle {
+    margin-bottom: 6px;
+  }
+
+  .question:nth-child(3) .questionTitle {
+    margin-bottom: 8px;
+  }
+
+  .modal {
+    width: 1290px;
+    padding:
+      50px,
+      53 px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 38px;
+    line-height: 126%;
+    color: var(--color-text-accent);
+    margin-bottom: 35px;
+  }
+
+  .form {
+    gap: 22px;
+  }
+
+  .questionTitle {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 121%;
+    color: #000;
+  }
+
+  .option {
+    min-height: 47px;
+    min-width: 397px;
+  }
+
+  .option span {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    text-align: left;
+    color: #000;
+  }
+  .desktopLineBreak {
+    display: none;
+  }
+
+  .phoneInput {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0 4px;
+    border: none;
+    border-bottom: 2px solid var(--color-text-accent);
+    outline: none;
+    background: transparent;
+
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 121%;
+    color: var(--color-text);
+  }
+  .phoneInputWrapper {
+    border: 1px solid var(--color-button);
+    border-radius: 16px;
+    padding: 16px 8px;
+    width: 395px;
+    height: 63px;
+    box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+    background: var(--color-white);
+    margin: 0;
+  }
+  .phoneInputWrapper::after {
+    display: none;
+  }
+
+  .submitButton {
+    margin-top: 40px;
+  }
+
+  .phoneError {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 122%;
+    text-align: center;
+  }
+}
