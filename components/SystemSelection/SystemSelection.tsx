@@ -22,7 +22,7 @@ const systems = [
 export default function SystemSelection({ onConsultationClick }: SystemSelectionProps) {
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <div className="container">
         <h2 className={styles.title}>
           Надійна енергія для вашого будинку — незалежно від ситуації
         </h2>
@@ -32,7 +32,7 @@ export default function SystemSelection({ onConsultationClick }: SystemSelection
             <div key={system.title} className={styles.card}>
               <h3 className={styles.cardTitle}>{system.title}</h3>
               <p className={styles.cardDescription}>{system.description}</p>
-              <button className={styles.cardCta} onClick={onConsultationClick}>
+              <button type="button" className={styles.cardCta} onClick={onConsultationClick}>
                 {system.ctaLabel}
               </button>
             </div>

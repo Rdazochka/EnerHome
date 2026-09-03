@@ -2,44 +2,7 @@
 
 import { useState } from 'react';
 import styles from './FAQ.module.css';
-
-const faqData = [
-  {
-    question: 'Яке рішення підійде саме для мого будинку?',
-    answer:
-      'Це залежить від ваших потреб, кількості та потужності приладів, тривалості відключень і можливості підключення до електромережі. Ми можемо підібрати систему відповідно до вашого споживання та бажаного рівня автономності.',
-  },
-  {
-    question: 'Скільки годин працюватиме система?',
-    answer:
-      'Час роботи залежить від ємності акумулятора та потужності споживання. Чим більше енергії потрібно будинку, тим швидше розряджається батарея. Під час підбору системи ми враховуємо необхідне навантаження та бажану тривалість автономної роботи.',
-  },
-  {
-    question: 'Що буде працювати під час відключення?',
-    answer:
-      'Працюватиме те обладнання, яке ви підключите до системи резервного живлення: холодильник, освітлення, роутер, насос опалення чи інші критичні прилади. Навантаження узгоджується на етапі підбору, щоб система покривала саме ваші пріоритети.',
-  },
-  {
-    question: 'Чи потрібні сонячні панелі?',
-    answer:
-      'Ні, не обов\'язково. Система може працювати від акумуляторів і заряджатися від електромережі або генератора. Сонячні панелі потрібні, якщо ви хочете виробляти власну електроенергію та підвищити автономність.',
-  },
-  {
-    question: 'Чи можна встановити систему без підключення до електромережі?',
-    answer:
-      'Так. Для будинків без доступу до електромережі можна створити автономну систему з сонячними панелями, акумуляторами та інвертором. Конкретна конфігурація залежить від потреб будинку та доступних джерел енергії.',
-  },
-  {
-    question: 'Скільки коштує автономна система?',
-    answer:
-      'Вартість залежить від потужності обладнання, ємності акумуляторів, кількості сонячних панелей та інших компонентів. Ви можете пройти короткий підбір системи, щоб отримати рекомендовану конфігурацію та її орієнтовну вартість.',
-  },
-  {
-    question: 'Чи можна збільшити потужність системи пізніше?',
-    answer:
-      'У багатьох випадках так. Систему можна спроєктувати з можливістю подальшого розширення — наприклад, додати акумулятори або сонячні панелі. Це потрібно передбачити ще на етапі вибору обладнання.',
-  },
-];
+import { faqItems } from '@/lib/faq';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -50,7 +13,7 @@ export default function FAQ() {
 
   return (
     <section className={styles.faq} id="faq">
-      <div className={styles.container}>
+      <div className="container">
         <span className={styles.label}>FAQs</span>
         <h2 className={styles.title}>Не знайшли відповіді на своє питання?</h2>
         <p className={styles.description}>
@@ -59,20 +22,24 @@ export default function FAQ() {
         </p>
 
         <ul className={styles.list}>
-          {faqData.map((item, index) => {
+          {faqItems.map((item, index) => {
             const isOpen = openIndex === index;
+            const panelId = `faq-panel-${index}`;
 
             return (
-              <li key={index} className={styles.item}>
+              <li key={item.question} className={styles.item}>
                 <button
+                  type="button"
                   className={`${styles.question} ${isOpen ? styles.questionActive : ''}`}
                   onClick={() => toggle(index)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
                 >
                   <span className={styles.icon}>{isOpen ? '−' : '+'}</span>
                   <span>{item.question}</span>
                 </button>
                 {isOpen && (
-                  <div className={styles.answer}>
+                  <div id={panelId} className={styles.answer}>
                     <p>{item.answer}</p>
                   </div>
                 )}
