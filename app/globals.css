@@ -8,6 +8,13 @@
   - Section styles live in *.module.css
 */
 
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   --white: #fff;
   --background: #f8fffa;
@@ -61,19 +68,19 @@ button {
 .container {
   width: 100%;
   margin: 0 auto;
-  padding-inline: 16px;
+  padding: 0 16px;
 }
 
 @media (min-width: 834px) {
   .container {
     max-width: 834px;
-    padding-inline: 32px;
+    padding: 0 32px;
   }
 }
 
 @media (min-width: 1440px) {
   .container {
     max-width: 1440px;
-    padding-inline: 100px;
+    padding: 0 100px;
   }
 }
