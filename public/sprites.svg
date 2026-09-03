@@ -201,4 +201,31 @@
     <path d="M14.04 0H12.2C11.67 0 11.25 0.42 11.25 0.95C11.25 1.47 11.67 1.89 12.2 1.89H14.04C14.57 1.89 14.99 1.47 14.99 0.95C14.99 0.42 14.57 0 14.04 0Z" fill="#7BE191" />
     <path d="M9.33 0.93C8.89 5.39 5.37 8.96 0.95 9.41C0.43 9.46 0 9.03 0 8.51C0 7.99 0.43 7.57 0.95 7.51C4.34 7.07 7.02 4.35 7.44 0.93C7.5 0.42 7.92 0 8.43 0C8.95 0 9.38 0.42 9.33 0.93Z" fill="#7BE191" />
   </symbol>
+
+  <symbol id="icon-arrow-right" viewBox="0 0 20 16" fill="none">
+    <g clip-path="url(#clip-arrow-right)">
+      <g filter="url(#filter-arrow-right)">
+        <path d="M3 7.5H17M11.4 13L17 7.5L11.4 2" stroke="#3AA150" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </g>
+    </g>
+    <defs>
+      <filter id="filter-arrow-right" x="-10" y="-11" width="48" height="45" filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha" />
+        <feOffset dx="4" dy="4" />
+        <feGaussianBlur stdDeviation="8" />
+        <feComposite in2="hardAlpha" operator="out" />
+        <feColorMatrix type="matrix"
+          values="0 0 0 0 0.00555479 0 0 0 0 0.287502 0 0 0 0 0.238425 0 0 0 0.4 0" />
+        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_arrow_right" />
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_arrow_right" result="shape" />
+      </filter>
+      <clipPath id="clip-arrow-right">
+        <rect width="20" height="16" fill="white" />
+      </clipPath>
+    </defs>
+  </symbol>
 </svg>
