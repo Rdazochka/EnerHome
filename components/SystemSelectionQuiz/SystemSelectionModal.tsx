@@ -2,39 +2,59 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import styles from './SystemSelectionModal.module.css';
+import { isValidUaPhone, normalizeUaPhone } from '@/lib/phone';
 
 type SystemSelectionModalQuizProps = {
   onClose: () => void;
 };
 
 export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionModalQuizProps) {
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState('+380');
+  const [attempted, setAttempted] = useState(false);
 
   useEffect(() => {
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleEscape);
+
     return () => {
       document.body.style.overflow = originalOverflow;
+      document.removeEventListener('keydown', handleEscape);
     };
-  }, []);
+  }, [onClose]);
+
+  const phoneError = attempted && !isValidUaPhone(phone);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (phone.length === 0) return;
+    setAttempted(true);
+    if (!isValidUaPhone(phone)) return;
     onClose();
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <div className={styles.modal}>
+    <div className={styles.modalOverlay} onClick={onClose}>
+      <div
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="system-quiz-title"
+        onClick={event => event.stopPropagation()}
+      >
         <button type="button" className={styles.closeButton} onClick={onClose} aria-label="Закрити">
           <svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true">
             <use href="/sprites.svg#icon-close-modal-sm" />
           </svg>
         </button>
 
-        <h2 className={styles.title}>Підберіть систему під свій будинок</h2>
+        <h2 id="system-quiz-title" className={styles.title}>
+          Підберіть систему під свій будинок
+        </h2>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.question}>
@@ -220,7 +240,7 @@ export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionMod
 
             <div
               className={`${styles.phoneInputWrapper} ${
-                phone.length > 0 ? styles.phoneValid : styles.phoneInvalid
+                phoneError ? styles.phoneInvalid : phone.length > 4 ? styles.phoneValid : ''
               }`}
             >
               <span className={styles.phoneCode}>+380</span>
@@ -228,17 +248,28 @@ export default function SystemSelectionModalQuiz({ onClose }: SystemSelectionMod
               <input
                 type="tel"
                 className={styles.phoneInput}
-                value={phone}
-                onChange={event => setPhone(event.target.value)}
+                value={phone.replace(/^\+380/, '')}
+                onChange={event => {
+                  let digits = event.target.value.replace(/\D/g, '');
+                  if (digits.startsWith('380')) digits = digits.slice(3);
+                  setPhone(normalizeUaPhone(digits));
+                }}
+                inputMode="tel"
+                autoComplete="tel"
+                maxLength={9}
+                aria-invalid={phoneError}
+                aria-describedby={phoneError ? 'quiz-phone-error' : undefined}
               />
             </div>
 
-            {phone.length === 0 && (
-              <p className={styles.phoneError}>Будь ласка, введіть номер телефону</p>
+            {phoneError && (
+              <p id="quiz-phone-error" className={styles.phoneError}>
+                Будь ласка, введіть коректний номер телефону
+              </p>
             )}
           </div>
 
-          <button type="submit" className={styles.submitButton} disabled={phone.length === 0}>
+          <button type="submit" className={styles.submitButton} disabled={phoneError}>
             Надіслати
           </button>
 

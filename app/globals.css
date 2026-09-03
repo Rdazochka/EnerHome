@@ -23,7 +23,6 @@
   --background-3: #7be191;
   --border: #6cbb72;
   --button: #3aa150;
-  --rural-silhouette-landscape-vector: #199981;
   --background-4: #027965;
   --tekst-akcent: #2f5803;
   --text: #001202;
@@ -34,8 +33,6 @@
 :root {
   --font-family: var(--font-montserrat), 'Montserrat', sans-serif;
   --second-family: var(--font-ibm-plex-serif), 'IBM Plex Serif', sans-serif;
-  --third-family: var(--font-inter), 'Inter', sans-serif;
-  --font3: var(--font-roboto), 'Roboto', sans-serif;
 }
 
 body {

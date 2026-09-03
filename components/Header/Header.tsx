@@ -64,8 +64,8 @@ export default function Header({ onConsultationClick }: HeaderProps) {
           </a>
 
           <nav className={styles.nav}>
-            <a href="#hero" className={styles.navHomeIcon}>
-              <svg width="24" height="24">
+            <a href="#hero" className={styles.navHomeIcon} aria-label="Головна">
+              <svg width="24" height="24" aria-hidden="true">
                 <use href="/sprites.svg#icon-home" />
               </svg>
             </a>
@@ -76,11 +76,12 @@ export default function Header({ onConsultationClick }: HeaderProps) {
             ))}
           </nav>
 
-          <button className={styles.cta} onClick={onConsultationClick}>
+          <button type="button" className={styles.cta} onClick={onConsultationClick}>
             Консультація
           </button>
 
           <button
+            type="button"
             className={styles.burger}
             onClick={() => setIsMenuOpen(open => !open)}
             aria-label={isMenuOpen ? 'Закрити меню' : 'Відкрити меню'}

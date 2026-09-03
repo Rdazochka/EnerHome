@@ -1,10 +1,7 @@
 .faq {
   width: 100%;
+  padding: 32px 0;
   background: var(--background);
-}
-
-.container {
-  padding: 32px 16px;
 }
 
 .label {
@@ -95,8 +92,8 @@
 }
 
 @media (min-width: 834px) {
-  .container {
-    padding: 32px 44px;
+  .faq {
+    padding: 32px 0;
   }
 
   .label {
@@ -142,8 +139,8 @@
 }
 
 @media (min-width: 1440px) {
-  .container {
-    padding: 88px 100px;
+  .faq {
+    padding: 88px 0;
   }
 
   .label {

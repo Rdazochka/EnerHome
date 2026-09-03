@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import styles from './MobileMenu.module.css';
 
 export type MobileNavItem = {
@@ -34,13 +35,15 @@ export default function MobileMenu({
         aria-modal="true"
         aria-label="Мобільне меню"
         aria-hidden={!isOpen}
+        inert={!isOpen}
       >
-        <img
+        <Image
           className={styles.bgImage}
           src="/images/hero/hero-section-mobile.jpg"
-          srcSet="/images/hero/hero-section-mobile.jpg 1x, /images/hero/hero-section-mobile-2x.jpg 2x"
           alt=""
-          aria-hidden="true"
+          fill
+          sizes="100vw"
+          aria-hidden
         />
         <div className={styles.scrim} aria-hidden="true" />
 

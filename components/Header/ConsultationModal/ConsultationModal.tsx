@@ -1,53 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import styles from './ConsultationModal.module.css';
+import { isValidUaPhone, normalizeUaPhone } from '@/lib/phone';
 
 type ModalStatus = 'form' | 'error' | 'success';
 
 interface ConsultationModalProps {
   isOpen: boolean;
   onClose: () => void;
-}
-
-/** Ukrainian mobile operator codes (2 digits after +380) */
-const UA_MOBILE_OPERATORS = new Set([
-  '39',
-  '50',
-  '63',
-  '66',
-  '67',
-  '68',
-  '73',
-  '75',
-  '77',
-  '91',
-  '92',
-  '93',
-  '94',
-  '95',
-  '96',
-  '97',
-  '98',
-  '99',
-]);
-
-function normalizeUaPhone(value: string): string {
-  const digits = value.replace(/\D/g, '');
-  const withoutCountry = digits.startsWith('380') ? digits.slice(3) : digits;
-  return `+380${withoutCountry.slice(0, 9)}`;
-}
-
-function isValidUaPhone(phone: string): boolean {
-  const digits = phone.replace(/\D/g, '');
-  if (!/^380\d{9}$/.test(digits)) return false;
-
-  const operator = digits.slice(3, 5);
-  if (!UA_MOBILE_OPERATORS.has(operator)) return false;
-
-  // reject obviously fake numbers like +380670000000
-  const subscriber = digits.slice(5);
-  return !/^0+$/.test(subscriber);
 }
 
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
@@ -85,7 +46,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     }
   }, [isOpen]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event?: FormEvent) => {
+    event?.preventDefault();
     if (!isValidUaPhone(phone)) {
       setStatus('error');
       return;
@@ -103,6 +65,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       className={`${styles.overlay} ${isOpen ? styles.overlayActive : ''}`}
       onClick={onClose}
       aria-hidden={!isOpen}
+      inert={!isOpen}
     >
       <div
         className={styles.modal}
@@ -146,7 +109,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 оптимальне енергетичне рішення для вашого будинку.
               </p>
 
-              <div className={styles.form}>
+              <form className={styles.form} onSubmit={handleSubmit}>
                 <div
                   className={`${styles.inputWrapper} ${status === 'error' ? styles.inputWrapperError : ''}`}
                 >
@@ -177,9 +140,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
                 <div className={styles.submitGroup}>
                   <button
-                    type="button"
+                    type="submit"
                     className={`${styles.submitBtn} ${status === 'error' ? styles.submitBtnDisabled : ''}`}
-                    onClick={handleSubmit}
                     disabled={status === 'error'}
                   >
                     Консультація
@@ -189,7 +151,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                     Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних.
                   </p>
                 </div>
-              </div>
+              </form>
             </>
           )}
         </div>

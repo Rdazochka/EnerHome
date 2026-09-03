@@ -33,18 +33,16 @@ export default function HowItWorks() {
 
             <div className={styles.content}>
               <div className={styles.frame4}>
-                <p className={styles.subtitle}>
-                  Від вашої потреби — до готової системи
-                </p>
+                <p className={styles.subtitle}>Від вашої потреби — до готової системи</p>
               </div>
 
               <ol className={styles.list}>
-            {steps.map((step) => (
-              <li key={step.number} className={styles.step}>
-                <span className={styles.number}>{step.number}</span>
-                <div className={styles.stepContent}>{step.text}</div>
-              </li>
-            ))}
+                {steps.map(step => (
+                  <li key={step.number} className={styles.step}>
+                    <span className={styles.number}>{step.number}</span>
+                    <div className={styles.stepContent}>{step.text}</div>
+                  </li>
+                ))}
               </ol>
             </div>
           </div>
