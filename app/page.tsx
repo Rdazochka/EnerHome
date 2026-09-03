@@ -10,6 +10,7 @@ import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import Projects from '@/components/Projects/Projects';
 import About from '@/components/About/About';
 import FAQ from '@/components/FAQ/FAQ';
+import FinalCta from '@/components/FinalCta/FinalCta';
 import Footer from '@/components/Footer/Footer';
 import ConsultationModal from '@/components/Header/ConsultationModal/ConsultationModal';
 
@@ -29,6 +30,7 @@ export default function Home() {
         <Projects />
         <About />
         <FAQ />
+        <FinalCta onConsultationClick={() => setIsModalOpen(true)} />
       </main>
 
       <Footer />
