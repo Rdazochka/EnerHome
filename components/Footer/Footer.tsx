@@ -1,3 +1,4 @@
+import HashLink from '@/components/HashLink';
 import styles from './Footer.module.css';
 import { siteConfig } from '@/lib/site';
 
@@ -13,11 +14,11 @@ export default function Footer() {
       <div className={`container ${styles.container}`}>
         <div className={styles.top}>
           <div className={styles.brand}>
-            <a href="#hero" className={styles.logo} aria-label={siteConfig.name}>
+            <HashLink href="#hero" className={styles.logo} aria-label={siteConfig.name}>
               <svg className={styles.logoImg} width="118" height="54" aria-hidden="true">
                 <use href="/sprites.svg#icon-logo" />
               </svg>
-            </a>
+            </HashLink>
             <p className={styles.tagline}>{siteConfig.tagline}</p>
           </div>
 
@@ -25,10 +26,10 @@ export default function Footer() {
             <h2 className={styles.heading}>Компанія</h2>
             <ul className={styles.list}>
               <li>
-                <a href="#projects">Проєкти</a>
+                <HashLink href="#projects">Проєкти</HashLink>
               </li>
               <li>
-                <a href="#about">Про нас</a>
+                <HashLink href="#about">Про нас</HashLink>
               </li>
             </ul>
           </div>

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Header.module.css';
 import MobileMenu from './Mobile-menu/MobileMenu';
+import HashLink from '@/components/HashLink';
 
 const navItems = [
   { href: '#about', label: 'Про нас' },
@@ -59,20 +60,20 @@ export default function Header({ onConsultationClick }: HeaderProps) {
     <>
       <header ref={headerRef} className={styles.header}>
         <div className={styles.container}>
-          <a href="#hero" className={styles.logo} aria-label="EnerHome">
+          <HashLink href="#hero" className={styles.logo} aria-label="EnerHome">
             <Logo className={styles.logoImg} />
-          </a>
+          </HashLink>
 
           <nav className={styles.nav}>
-            <a href="#hero" className={styles.navHomeIcon} aria-label="Головна">
+            <HashLink href="#hero" className={styles.navHomeIcon} aria-label="Головна">
               <svg width="24" height="24" aria-hidden="true">
                 <use href="/sprites.svg#icon-home" />
               </svg>
-            </a>
+            </HashLink>
             {navItems.map(item => (
-              <a key={item.href} href={item.href} className={styles.navLink}>
+              <HashLink key={item.href} href={item.href} className={styles.navLink}>
                 {item.label}
-              </a>
+              </HashLink>
             ))}
           </nav>
 

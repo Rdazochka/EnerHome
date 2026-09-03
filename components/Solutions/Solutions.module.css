@@ -18,23 +18,24 @@
   width: 100%;
 }
 
-.track {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+.viewport {
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
+.track {
+  display: flex;
+  will-change: transform;
+  transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.trackDragging {
+  transition: none;
 }
 
 .card {
   flex: 0 0 100%;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  min-width: 0;
 }
 
 .cardInner {
@@ -104,6 +105,17 @@
   border-radius: 50%;
   background: var(--white);
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.25);
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+
+.navBtn:hover {
+  transform: scale(1.06);
+}
+
+.navBtn:active {
+  transform: scale(0.94);
 }
 
 .navIcon {
@@ -134,6 +146,10 @@
 }
 
 @media (min-width: 834px) {
+  .viewport {
+    overflow: visible;
+  }
+
 
   .section {
     padding: 45px 0;
@@ -152,7 +168,9 @@
     grid-auto-rows: 1fr;
     gap: 16px;
     overflow: visible;
-    scroll-snap-type: none;
+    transform: none !important;
+    transition: none;
+    will-change: auto;
   }
 
   .card {
