@@ -38,6 +38,8 @@ const solutions = [
 ];
 
 const CAROUSEL_MQ = '(max-width: 833px)';
+// Keep in sync with the `gap` of `.track` in Solutions.module.css.
+const SLIDE_GAP = 20;
 
 export default function Solutions() {
   const viewportRef = useRef<HTMLDivElement>(null);
@@ -126,7 +128,9 @@ export default function Solutions() {
               style={
                 isCarousel
                   ? {
-                      transform: `translate3d(calc(${-activeIndex * 100}% + ${dragX}px), 0, 0)`,
+                      transform: `translate3d(calc(${-activeIndex * 100}% + ${
+                        dragX - activeIndex * SLIDE_GAP
+                      }px), 0, 0)`,
                     }
                   : undefined
               }

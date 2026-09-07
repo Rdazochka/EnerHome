@@ -149,7 +149,10 @@ export default function Projects() {
     const card = track.children[index] as HTMLElement | undefined;
     if (!card) return;
 
-    const offset = viewport.clientWidth / 2 - (card.offsetLeft + card.offsetWidth / 2);
+    // Both boxes share an offsetParent, so the difference is the card's
+    // untransformed position inside the viewport.
+    const cardLeft = card.offsetLeft - viewport.offsetLeft;
+    const offset = viewport.clientWidth / 2 - (cardLeft + card.offsetWidth / 2);
     setTrackOffset(offset);
     trackOffsetRef.current = offset;
   }, []);
