@@ -1,40 +1,41 @@
 'use client';
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import styles from './Projects.module.css';
 
 const projects = [
   {
-    srcMobile: '/images/projects/project-1-mobile.png',
-    srcDesktop: '/images/projects/project-1-desktop.png',
-    alt: 'Будиночок із сонячними панелями на даху',
+    src: '/images/projects/gallery-1.jpg',
+    alt: 'Генератор і газовий резервуар біля приватного будинку',
   },
   {
-    srcMobile: '/images/projects/project-2-mobile.png',
-    srcDesktop: '/images/projects/project-2-desktop.png',
-    alt: 'Встановлений генератор біля приватного будинку',
+    src: '/images/projects/gallery-2.jpg',
+    alt: 'Встановлений генератор із газовими балонами біля заміського будинку',
   },
   {
-    srcMobile: '/images/projects/project-3-mobile.png',
-    srcDesktop: '/images/projects/project-3-desktop.png',
-    alt: 'Сонячна електростанція на даху заміського будинку',
+    src: '/images/projects/gallery-3.jpg',
+    alt: 'Дерев’яний будинок із сонячними панелями на даху',
   },
   {
-    srcMobile: '/images/projects/project-4-mobile.png',
-    srcDesktop: '/images/projects/project-4-desktop.png',
-    alt: 'Комплексна енергосистема біля житлового будинку',
+    src: '/images/projects/gallery-4.jpg',
+    alt: 'Сонячна електростанція на даху заміського котеджу',
   },
   {
-    srcMobile: '/images/projects/project-5-mobile.png',
-    srcDesktop: '/images/projects/project-5-desktop.png',
-    alt: 'Резервне живлення для приватного будинку',
+    src: '/images/projects/gallery-5.jpg',
+    alt: 'Будинок у розрізі з накопичувачем енергії та сонячними панелями',
   },
 ];
 
 const SLIDE_COUNT = projects.length;
-const LOOP_COPIES = 3;
-const INITIAL_INDEX = Math.floor(SLIDE_COUNT / 2);
-const INITIAL_LOOP_INDEX = SLIDE_COUNT + INITIAL_INDEX;
+const LOOP_COPIES = 5;
+const CENTER_COPY = Math.floor(LOOP_COPIES / 2);
+const CENTER_COPY_START = SLIDE_COUNT * CENTER_COPY;
+const INITIAL_LOOP_INDEX = CENTER_COPY_START + Math.floor(SLIDE_COUNT / 2);
+/* Keep one full copy of headroom on both sides so stepping never runs out of slides. */
+const SAFE_MIN_LOOP_INDEX = SLIDE_COUNT;
+const SAFE_MAX_LOOP_INDEX = SLIDE_COUNT * (LOOP_COPIES - 1) - 1;
+const VISIBLE_COPY = CENTER_COPY;
 const DESKTOP_MQ = '(min-width: 1440px)';
 const DESKTOP_GAP = 24;
 const DESKTOP_CARD_WIDTH = 398;
@@ -57,15 +58,15 @@ function wrapIndex(index: number) {
 }
 
 function normalizeLoopIndex(index: number) {
-  let nextIndex = index;
-  if (nextIndex < SLIDE_COUNT) nextIndex += SLIDE_COUNT;
-  if (nextIndex >= SLIDE_COUNT * 2) nextIndex -= SLIDE_COUNT;
-  return nextIndex;
+  return CENTER_COPY_START + wrapIndex(index);
 }
 
 function nearestLoopIndex(logicalIndex: number, currentLoopIndex: number) {
   const target = wrapIndex(logicalIndex);
-  const candidates = [target, target + SLIDE_COUNT, target + SLIDE_COUNT * 2];
+  const candidates = Array.from(
+    { length: LOOP_COPIES },
+    (_, copy) => target + SLIDE_COUNT * copy,
+  ).filter(candidate => candidate >= SAFE_MIN_LOOP_INDEX && candidate <= SAFE_MAX_LOOP_INDEX);
 
   return candidates.reduce((closest, candidate) =>
     Math.abs(candidate - currentLoopIndex) < Math.abs(closest - currentLoopIndex)
@@ -155,15 +156,18 @@ export default function Projects() {
 
   const jumpToLoopIndex = useCallback(
     (nextLoopIndex: number) => {
-      setIsJumping(true);
-      commitLoopIndex(nextLoopIndex);
-      updateOffset(nextLoopIndex);
+      if (nextLoopIndex === loopIndexRef.current) return;
 
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setIsJumping(false);
-        });
+      // Rewind to an equivalent slide with transitions off, flushing the style
+      // change so it becomes the new starting point instead of being animated.
+      flushSync(() => {
+        setIsJumping(true);
+        commitLoopIndex(nextLoopIndex);
+        updateOffset(nextLoopIndex);
       });
+
+      trackRef.current?.getBoundingClientRect();
+      flushSync(() => setIsJumping(false));
     },
     [commitLoopIndex, updateOffset],
   );
@@ -181,14 +185,39 @@ export default function Projects() {
     [jumpToLoopIndex],
   );
 
-  const goTo = useCallback(
-    (index: number) => {
-      const nextLoopIndex = nearestLoopIndex(index, loopIndexRef.current);
+  const moveTo = useCallback(
+    (nextLoopIndex: number) => {
       commitLoopIndex(nextLoopIndex);
       updateOffset(nextLoopIndex);
       scheduleNormalize(nextLoopIndex);
     },
     [commitLoopIndex, scheduleNormalize, updateOffset],
+  );
+
+  // Dots jump straight to a slide, so pick the copy that is closest to travel to.
+  const goTo = useCallback(
+    (index: number) => {
+      moveTo(nearestLoopIndex(index, loopIndexRef.current));
+    },
+    [moveTo],
+  );
+
+  // Arrows and swipes always advance one slide in the requested direction.
+  const step = useCallback(
+    (direction: 1 | -1) => {
+      const next = loopIndexRef.current + direction;
+
+      if (next >= SAFE_MIN_LOOP_INDEX && next <= SAFE_MAX_LOOP_INDEX) {
+        moveTo(next);
+        return;
+      }
+
+      // Out of headroom: rewind to the middle copy first so the step stays a step.
+      window.clearTimeout(normalizeTimerRef.current);
+      jumpToLoopIndex(normalizeLoopIndex(loopIndexRef.current));
+      moveTo(loopIndexRef.current + direction);
+    },
+    [jumpToLoopIndex, moveTo],
   );
 
   useLayoutEffect(() => {
@@ -238,7 +267,7 @@ export default function Projects() {
       setIsDragging(false);
 
       if (Math.abs(delta) > 56) {
-        goTo(loopIndexRef.current + (delta < 0 ? 1 : -1));
+        step(delta < 0 ? 1 : -1);
         return;
       }
 
@@ -264,7 +293,7 @@ export default function Projects() {
       viewport.removeEventListener('wheel', onWheel);
       window.clearTimeout(normalizeTimerRef.current);
     };
-  }, [goTo, updateOffset]);
+  }, [step, updateOffset]);
 
   useEffect(() => {
     const onResize = () => {
@@ -295,22 +324,21 @@ export default function Projects() {
             >
               {slides.map(slide => (
                 <li
-                  key={`${slide.project.srcDesktop}-${slide.copy}`}
+                  key={`${slide.project.src}-${slide.copy}`}
                   className={`${styles.card} ${getCardClass(slide.loopIndex, loopIndex)}`}
                   style={
                     isDesktop
                       ? { transform: getDesktopCardTransform(slide.loopIndex, loopIndex) }
                       : undefined
                   }
-                  aria-hidden={slide.copy !== 1 ? true : undefined}
+                  aria-hidden={slide.copy !== VISIBLE_COPY ? true : undefined}
                 >
                   <div className={styles.frame1}>
                     <div className={styles.frame2}>
                       <picture>
-                        <source media="(min-width: 834px)" srcSet={slide.project.srcDesktop} />
                         <img
-                          src={slide.project.srcMobile}
-                          alt={slide.copy === 1 ? slide.project.alt : ''}
+                          src={slide.project.src}
+                          alt={slide.copy === VISIBLE_COPY ? slide.project.alt : ''}
                           width={311}
                           height={459}
                           className={styles.photo}
@@ -327,7 +355,7 @@ export default function Projects() {
             <button
               type="button"
               className={styles.navBtn}
-              onClick={() => goTo(activeIndex - 1)}
+              onClick={() => step(-1)}
               aria-label="Попередній проєкт"
             >
               <svg className={styles.navIcon} aria-hidden="true">
@@ -338,7 +366,7 @@ export default function Projects() {
             <div className={styles.dots} role="tablist" aria-label="Слайди проєктів">
               {projects.map((project, index) => (
                 <button
-                  key={project.srcDesktop}
+                  key={project.src}
                   type="button"
                   className={styles.dot}
                   onClick={() => goTo(index)}
@@ -361,7 +389,7 @@ export default function Projects() {
             <button
               type="button"
               className={styles.navBtn}
-              onClick={() => goTo(activeIndex + 1)}
+              onClick={() => step(1)}
               aria-label="Наступний проєкт"
             >
               <svg className={styles.navIcon} aria-hidden="true">

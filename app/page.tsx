@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
-import SystemSelection from '@/components/SystemSelection/SystemSelection';
-import SystemSelectionQuiz from '@/components/SystemSelectionQuiz/SystemSelectionQuiz';
+import SystemSelectionSwap from '@/components/SystemSelectionSwap/SystemSelectionSwap';
 import Solutions from '@/components/Solutions/Solutions';
 import HowItWorks from '@/components/HowItWorks/HowItWorks';
 import Projects from '@/components/Projects/Projects';
@@ -23,8 +22,7 @@ export default function Home() {
 
       <main>
         <Hero onConsultationClick={() => setIsModalOpen(true)} />
-        <SystemSelection onConsultationClick={() => setIsModalOpen(true)} />
-        <SystemSelectionQuiz />
+        <SystemSelectionSwap />
         <Solutions />
         <HowItWorks />
         <Projects />

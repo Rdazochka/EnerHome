@@ -1,0 +1,36 @@
+.swap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  transition: height 0.55s cubic-bezier(0.22, 0.08, 0.25, 1);
+}
+
+.view {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 0.08, 0.25, 1),
+    visibility 0.45s;
+}
+
+.viewActive {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swap,
+  .view {
+    transition: none;
+  }
+}
